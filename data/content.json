@@ -1,0 +1,63 @@
+{
+    "seo": {
+        "title": "Luxury Builder Floors in Gurgaon | Floors Gurgaon",
+        "description": "Explore premium builder floors in Gurgaon. Discover luxury homes in prime locations and find a property that suits your lifestyle.",
+        "keywords": "builder floors Gurgaon, luxury floors Gurgaon, premium properties Gurgaon, residential properties Gurgaon",
+        "language": "hi"
+    },
+    "site": {
+        "logoText": "FLOORS",
+        "logoHighlight": "GURGAON",
+        "phone": "+91 98765 43210",
+        "phoneLink": "+919876543210"
+    },
+    "navigation": [
+        {
+            "label": "Home",
+            "url": "#home"
+        },
+        {
+            "label": "Projects",
+            "url": "#projects"
+        },
+        {
+            "label": "Locations",
+            "url": "#locations"
+        },
+        {
+            "label": "About Us",
+            "url": "#about"
+        },
+        {
+            "label": "Contact",
+            "url": "#contact"
+        }
+    ],
+    "hero": {
+        "eyebrow": "REMIUM LIVING IN GURGAON",
+        "heading": "Premium Builder Floors with Top Amenities",
+        "description": "Explore premium builder floors in Gurgaon’s finest locations.",
+        "primaryButton": "Explore Properties",
+        "secondaryButton": "Talk to an Expert",
+        "slides": [
+            {
+                "image": "images/hero-1.jpg",
+                "alt": "Luxury builder floor in Gurgaon",
+                "label": "Luxury Living",
+                "location": "Gurgaon, Haryana"
+            },
+            {
+                "image": "images/hero-3.jpg",
+                "alt": "Contemporary luxury home exterior",
+                "label": "Your Dream Home",
+                "location": "Find Your Perfect Space"
+            },
+            {
+                "image": "images/hero-78d5911ede2d03f388f3.jpg",
+                "alt": "Luxury builder floor in Gurgaon",
+                "label": "Luxury Living",
+                "location": "Gurgaon, Haryana"
+            }
+        ]
+    }
+}
