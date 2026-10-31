@@ -59,5 +59,277 @@
                 "location": "Gurgaon, Haryana"
             }
         ]
+    },
+    "projectSections": [
+        {
+            "id": "new-launch",
+            "titleHighlight": "New Launch",
+            "title": "Builder Floors in Gurgaon",
+            "description": "Freshly launched luxury builder floors with modern architecture, smart home features and premium amenities across Gurgaon's most sought-after sectors. RERA approved with free site visits available.",
+            "viewAllText": "View All",
+            "viewAllUrl": "#",
+            "externalUrl": "https://floorsgurgaon.com/",
+            "projects": [
+                {
+                    "id": "adani-samsara",
+                    "name": "Adani Samsara Ivana",
+                    "location": "Sector 63, Golf Course Extn. Road",
+                    "price": "₹ 4.28 Cr* Onwards",
+                    "rating": "4.9",
+                    "badge": "New Launch",
+                    "image": "images/project-2.jpg",
+                    "enquiryEnabled": true
+                },
+                {
+                    "id": "rof-pravasa",
+                    "name": "ROF Pravasa",
+                    "location": "Sector 88A, Gurgaon",
+                    "price": "₹ 2.40 Cr* Onwards",
+                    "rating": "5",
+                    "badge": "New Launch",
+                    "image": "images/property-c3b72821ed5ff7de24e43936.jpg",
+                    "enquiryEnabled": true,
+                    "shortDescription": "hale dill mera",
+                    "configuration": "2,3 bhk",
+                    "size": "2100+ sq.ft.",
+                    "status": "Under Construction",
+                    "developer": "",
+                    "externalUrl": "https://github.com/takashi-mishra"
+                },
+                {
+                    "id": "birla-navya",
+                    "name": "Birla Navya Avik",
+                    "location": "Sector 63A, Golf Course Extn. Road",
+                    "price": "₹ 5.69 Cr* Onwards",
+                    "rating": "4.8",
+                    "badge": "New Launch",
+                    "image": "images/project-3.jpg",
+                    "enquiryEnabled": true
+                },
+                {
+                    "id": "dlf-the-grove",
+                    "name": "DLF The Grove",
+                    "location": "DLF Phase 5, Gurgaon",
+                    "price": "₹ 8.24 Cr* Onwards",
+                    "rating": "5",
+                    "badge": "Ultra Luxury",
+                    "image": "images/project-4.jpg",
+                    "enquiryEnabled": true
+                }
+            ]
+        }
+    ],
+    "builderSection": {
+        "title": "Exploor floors by Builders",
+        "highlight": "Builder",
+        "description": "Choose from Gurgaon's most trusted real estate developers — each with a proven track record of quality construction and timely delivery.",
+        "buttonText": "All Builders",
+        "buttonUrl": "#",
+        "items": [
+            {
+                "name": "DLF",
+                "count": "12+ Projects",
+                "icon": "▦",
+                "url": "#",
+                "enabled": true
+            },
+            {
+                "name": "Adani Realty",
+                "count": "5+ Projects",
+                "icon": "▦",
+                "url": "#",
+                "enabled": true
+            },
+            {
+                "name": "Birla Estates",
+                "count": "4+ Projects",
+                "icon": "⌂",
+                "url": "#",
+                "enabled": true
+            },
+            {
+                "name": "M3M India",
+                "count": "8+ Projects",
+                "icon": "▰",
+                "url": "#",
+                "enabled": true
+            },
+            {
+                "name": "Smart World",
+                "count": "6+ Projects",
+                "icon": "◎",
+                "url": "#",
+                "enabled": true
+            },
+            {
+                "name": "Godrej Properties",
+                "count": "5+ Projects",
+                "icon": "▤",
+                "url": "#",
+                "enabled": true
+            },
+            {
+                "name": "Emaar India",
+                "count": "4+ Projects",
+                "icon": "★",
+                "url": "#",
+                "enabled": true
+            },
+            {
+                "name": "Signature Global",
+                "count": "7+ Projects",
+                "icon": "✎",
+                "url": "#",
+                "enabled": true
+            }
+        ]
+    },
+    "locationSection": {
+        "title": "Prime Locations for Luxury Floors in Gurgaon",
+        "description": "Gurgaon's strategic location and world-class infrastructure make it the most sought-after destination for luxury builder floors. Click on a location to explore all projects.",
+        "items": [
+            {
+                "name": "Dwarka Expressway",
+                "description": "High-growth corridor with world-class infrastructure",
+                "icon": "▰",
+                "url": "#",
+                "featured": false,
+                "enabled": true
+            },
+            {
+                "name": "Golf Course Road",
+                "description": "Luxury corridor with world-class amenities and high-end developments",
+                "icon": "⚑",
+                "url": "#",
+                "featured": false,
+                "enabled": true
+            },
+            {
+                "name": "Golf Course Extn. Road",
+                "description": "Rapidly emerging luxury zone with established infrastructure",
+                "icon": "▦",
+                "url": "#",
+                "featured": false,
+                "enabled": true
+            },
+            {
+                "name": "New Gurgaon",
+                "description": "Future-ready sectors with proximity to proposed airport",
+                "icon": "▦",
+                "url": "#",
+                "featured": false,
+                "enabled": true
+            },
+            {
+                "name": "Sohna Road",
+                "description": "Green surroundings with excellent connectivity to South Delhi",
+                "icon": "❧",
+                "url": "#",
+                "featured": false,
+                "enabled": true
+            },
+            {
+                "name": "Southern Peripheral Road",
+                "description": "Strategic location linking all major Gurgaon arteries",
+                "icon": "↔",
+                "url": "#",
+                "featured": false,
+                "enabled": true
+            },
+            {
+                "name": "Manesar",
+                "description": "Affordable luxury with great industrial township connectivity",
+                "icon": "◧",
+                "url": "#",
+                "featured": false,
+                "enabled": true
+            },
+            {
+                "name": "Pataudi Road",
+                "description": "Tranquil locale with spacious plotted developments",
+                "icon": "♠",
+                "url": "#",
+                "featured": false,
+                "enabled": true
+            },
+            {
+                "name": "All Locations",
+                "description": "Browse all projects across Gurgaon",
+                "icon": "⊞",
+                "url": "#",
+                "featured": true,
+                "enabled": true
+            }
+        ],
+        "buttonText": "Explore All Prime Locations",
+        "buttonUrl": "#"
+    },
+    "investmentSection": {
+        "title": "Investment Benefits of Builder Floors in Gurgaon",
+        "description": "Builder floors in Gurgaon offer exceptional investment opportunities with multiple revenue streams and long-term appreciation potential.",
+        "stats": [
+            {
+                "value": "50+",
+                "label": "Premium Sectors",
+                "enabled": true
+            },
+            {
+                "value": "₹15K+",
+                "label": "Avg. Price/Sq Ft",
+                "enabled": true
+            },
+            {
+                "value": "20%",
+                "label": "Annual Appreciation",
+                "enabled": true
+            },
+            {
+                "value": "1000+",
+                "label": "Luxury Projects",
+                "enabled": true
+            }
+        ],
+        "benefits": [
+            {
+                "icon": "％",
+                "title": "High Rental Yields",
+                "description": "Earn 4–6% annual rental yields with premium tenants preferring independent floors over apartments.",
+                "enabled": true
+            },
+            {
+                "icon": "↗",
+                "title": "Capital Appreciation",
+                "description": "Historical data shows 15–20% annual appreciation in prime sectors with continuous infrastructure development.",
+                "enabled": true
+            },
+            {
+                "icon": "▤",
+                "title": "Tax Benefits",
+                "description": "Claim maximum tax deductions on home loans, depreciation, and maintenance expenses for investment properties.",
+                "enabled": true
+            },
+            {
+                "icon": "◉",
+                "title": "Multiple Revenue Streams",
+                "description": "Rent different floors separately, use for commercial purposes, or convert into service apartments.",
+                "enabled": true
+            }
+        ],
+        "buttonText": "Get Investment Analysis",
+        "buttonUrl": "#contact"
+    },
+    "homepageLayout": {
+        "order": [
+            "projects",
+            "investment",
+            "builders",
+            "locations"
+        ],
+        "enabled": {
+            "projects": true,
+            "builders": true,
+            "locations": true,
+            "investment": true
+        }
     }
 }

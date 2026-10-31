@@ -1,0 +1,260 @@
+.detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 4%;
+    background: #1c2030;
+}
+
+.detail-brand {
+    color: #fff;
+    font-size: 25px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.detail-brand span {
+    color: #c94736;
+}
+
+.back-to-projects {
+    color: #fff;
+    text-decoration: none;
+}
+
+.property-detail-container {
+    width: min(92%, 1400px);
+    margin: 65px auto;
+}
+
+.property-detail-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.property-detail-heading h1 {
+    font-size: clamp(30px, 4vw, 48px);
+    color: #202435;
+    margin: 12px 0;
+}
+
+.detail-badge {
+    display: inline-block;
+    background: #d2bd65;
+    padding: 7px 15px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.detail-location {
+    color: #697386;
+    font-size: 17px;
+}
+
+.detail-rating {
+    background: #e52e55;
+    color: white;
+    padding: 9px 15px;
+    border-radius: 30px;
+    font-weight: 700;
+}
+
+.property-detail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(280px, 1fr);
+    gap: 45px;
+    align-items: start;
+}
+
+.property-detail-image {
+    width: 100%;
+    height: 370px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #eee;
+}
+
+.property-detail-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.property-about {
+    margin: 30px 0;
+}
+
+.property-about h2 {
+    color: #202435;
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.property-about p {
+    color: #697386;
+    line-height: 1.8;
+    font-size: 17px;
+}
+
+.property-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.property-highlight {
+    background: #f8f7f3;
+    border: 1px solid #e8e4d9;
+    border-radius: 15px;
+    padding: 20px;
+    min-width: 0;
+}
+
+.property-highlight span {
+    display: block;
+    color: #758094;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.property-highlight strong {
+    color: #202435;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.official-website-link {
+    display: inline-flex;
+    margin-top: 25px;
+    padding: 14px 22px;
+    background: #c94736;
+    color: white;
+    text-decoration: none;
+    border-radius: 9px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.official-website-link:hover {
+    background: #a93225;
+    transform: translateY(-3px);
+}
+
+.property-contact-card {
+    background: #1c2030;
+    padding: 35px;
+    border-radius: 28px;
+    color: white;
+    position: sticky;
+    top: 25px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.property-contact-card h2 {
+    font-size: 27px;
+    line-height: 1.3;
+    margin-bottom: 15px;
+}
+
+.property-contact-card p {
+    color: #aab0c1;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.property-contact-button {
+    display: block;
+    text-align: center;
+    padding: 16px;
+    background: #d2bd65;
+    color: #202435;
+    text-decoration: none;
+    font-weight: 800;
+    border-radius: 35px;
+    transition: 0.3s;
+}
+
+.property-contact-button:hover {
+    background: #e6d17c;
+    transform: translateY(-3px);
+}
+
+.property-phone {
+    display: block;
+    margin-top: 22px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+
+@media (max-width: 850px) {
+    .property-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .property-contact-card {
+        position: static;
+    }
+}
+
+@media (max-width: 600px) {
+    .detail-header {
+        padding: 17px 5%;
+    }
+
+    .detail-brand {
+        font-size: 19px;
+    }
+
+    .back-to-projects {
+        font-size: 13px;
+    }
+
+    .property-detail-container {
+        margin: 35px auto;
+    }
+
+    .property-detail-heading {
+        align-items: flex-start;
+    }
+
+    .property-detail-heading h1 {
+        font-size: 30px;
+    }
+
+  .property-detail-image a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.property-detail-image img {
+    cursor: pointer;
+    transition: transform 0.4s ease;
+}
+
+.property-detail-image a:hover img {
+    transform: scale(1.03);
+}
+
+    .property-about h2 {
+        font-size: 25px;
+    }
+
+    .property-highlights {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .property-highlight {
+        padding: 15px;
+    }
+
+    .property-contact-card {
+        padding: 25px;
+    }
+}

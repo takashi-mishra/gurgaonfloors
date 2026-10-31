@@ -1,23 +1,1135 @@
 <?php
 session_start();
-if (empty($_SESSION['admin_logged_in'])) { header('Location: login.php'); exit; }
-if (empty($_SESSION['csrf_token'])) $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
+if (empty($_SESSION['admin_logged_in'])) {
+    header('Location: login.php');
+    exit;
+}
+
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 $jsonPath = dirname(__DIR__) . '/data/content.json';
-$data = is_readable($jsonPath) ? json_decode((string)file_get_contents($jsonPath), true) : null;
-if (!is_array($data)) { http_response_code(500); exit('Could not read a valid data/content.json file.'); }
-function adminEscape($v): string { return htmlspecialchars((string)$v, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); }
-$seo=$data['seo']??[]; $site=$data['site']??[]; $hero=$data['hero']??[]; $slides=$hero['slides']??[]; $navigation=$data['navigation']??[];
-$saved=(string)($_GET['saved']??''); $error=(string)($_GET['error']??'');
-?><!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Admin Dashboard | Floors Gurgaon</title><link rel="stylesheet" href="admin.css"><style>
-.admin-layout{min-height:100vh}.content-area{padding-bottom:30px}.notice-box{margin:18px 0;padding:13px 16px;border-radius:10px;background:#fff8e8;color:#765516}.status-message{margin:14px 0;padding:13px 16px;border-radius:10px;background:#e8f8ee;color:#17663b}.status-message.error{background:#fff0f0;color:#a12626}.nav-editor-row{display:grid;grid-template-columns:32px minmax(130px,1fr) minmax(180px,2fr) 42px;gap:10px;align-items:center;margin:10px 0}.nav-editor-row input{width:100%;min-width:0}.nav-editor-row button{border:0;border-radius:8px;padding:10px;cursor:pointer;background:#ffeded;color:#a12626}.nav-tools{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.nav-tools button{border:0;border-radius:8px;padding:11px 15px;cursor:pointer}.add-link{background:#e8f8ee;color:#17663b}.move-link{background:#edf3ff;color:#244d94}.small-help{font-size:13px;color:#667085}.form-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}.logout-link{color:inherit;text-decoration:none;font-size:13px}.image-grid img{max-width:100%}.image-edit-form{padding-top:12px}.image-edit-form .form-group{margin-bottom:10px}.image-edit-form input[type=file]{font-size:12px;max-width:100%}.image-actions{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.image-actions button,.delete-image-button{border:0;border-radius:8px;padding:10px 12px;cursor:pointer;font-weight:600}.image-actions button:disabled{opacity:.4;cursor:not-allowed}.delete-image-button{background:#fff0f0;color:#a12626;width:100%}.add-image-panel{margin-top:22px}.image-card-body .image-path{overflow-wrap:anywhere}@media(max-width:650px){.nav-editor-row{grid-template-columns:24px 1fr 36px}.nav-editor-row .nav-url-field{grid-column:2/3}.nav-editor-row button{grid-column:3;grid-row:1/3}}
-</style></head><body><div class="admin-layout"><aside class="sidebar" id="sidebar"><a href="../index.php" class="sidebar-brand"><span class="brand-mark">FG</span><span class="brand-text"><strong>FLOORS</strong><small>GURGAON CMS</small></span></a><div class="sidebar-label">WORKSPACE</div><nav class="sidebar-nav" aria-label="Admin navigation"><button class="nav-item active" data-section="dashboard"><span class="nav-icon">▦</span>Dashboard</button><div class="sidebar-label">WEBSITE MANAGEMENT</div><button class="nav-item" data-section="seo"><span class="nav-icon">⌕</span>SEO Settings</button><button class="nav-item" data-section="hero"><span class="nav-icon">✎</span>Hero Content</button><button class="nav-item" data-section="images"><span class="nav-icon">▧</span>Hero Images <span class="nav-count"><?=count($slides)?></span></button><button class="nav-item" data-section="navigation"><span class="nav-icon">☰</span>Navbar Settings</button></nav><div class="sidebar-bottom"><div class="sidebar-status"><span class="status-dot"></span><span><strong>JSON CMS</strong><small>Content source</small></span></div><a href="../index.php" class="view-site" target="_blank">↗ &nbsp; View Website</a><a href="logout.php" class="view-site logout-link">↪ &nbsp; Log out</a></div></aside><div class="main-area"><header class="topbar"><div class="topbar-left"><button type="button" class="mobile-menu" id="mobileMenu" aria-label="Toggle sidebar">☰</button><div><div class="breadcrumb">Workspace / <span id="breadcrumbTitle">Dashboard</span></div><h1 id="pageHeading">Dashboard Overview</h1></div></div><div class="topbar-right"><a href="../index.php" target="_blank" class="preview-button">↗ &nbsp; Preview Website</a><div class="admin-avatar" title="Administrator">A</div></div></header><main class="content-area">
-<?php if($saved): ?><div class="status-message" role="status"><?=adminEscape($saved)?></div><?php endif; ?><?php if($error): ?><div class="status-message error" role="alert"><?=adminEscape($error)?></div><?php endif; ?>
-<section class="page-section active" id="section-dashboard"><div class="welcome-banner"><div><span class="eyebrow">YOUR WEBSITE, YOUR CONTROL</span><h2>Welcome to your workspace.</h2><p>Manage your website's content, SEO and navigation from one place.</p></div><div class="welcome-decoration">FG</div></div><div class="section-heading"><div><h2>Website overview</h2><p>Current content configuration.</p></div><span class="live-badge"><span class="status-dot"></span>JSON CMS active</span></div><div class="stats-grid"><article class="stat-card"><div class="stat-top"><span class="stat-icon purple">⌕</span><span class="stat-tag">SEO</span></div><div class="stat-number">01</div><h3>SEO Configuration</h3><p>Page title and search metadata</p><button class="text-link" data-open="seo">Manage SEO →</button></article><article class="stat-card"><div class="stat-top"><span class="stat-icon blue">✎</span><span class="stat-tag">CONTENT</span></div><div class="stat-number">01</div><h3>Hero Section</h3><p>Heading, description and buttons</p><button class="text-link" data-open="hero">Edit content →</button></article><article class="stat-card"><div class="stat-top"><span class="stat-icon orange">▧</span><span class="stat-tag">MEDIA</span></div><div class="stat-number"><?=count($slides)?></div><h3>Hero Slides</h3><p>Configured background images</p><button class="text-link" data-open="images">Review images →</button></article><article class="stat-card"><div class="stat-top"><span class="stat-icon green">☰</span><span class="stat-tag">NAVIGATION</span></div><div class="stat-number"><?=count($navigation)?></div><h3>Navbar Links</h3><p>Website navigation items</p><button class="text-link" data-open="navigation">Manage navbar →</button></article></div><div class="notice-box">Changes saved here update <code>data/content.json</code>. Keep a backup of this file before major edits.</div></section>
-<section class="page-section" id="section-seo"><div class="section-intro"><span class="section-icon purple">⌕</span><div><h2>SEO Settings</h2><p>Edit the metadata used by search engines.</p></div></div><div class="editor-layout"><article class="panel editor-panel"><div class="panel-heading"><div><h3>Search engine metadata</h3><p>Saved directly to content.json.</p></div></div><form class="admin-form" method="post" action="save.php"><input type="hidden" name="csrf_token" value="<?=adminEscape($_SESSION['csrf_token'])?>"><input type="hidden" name="action" value="seo"><div class="form-group"><label for="seoTitle">Page title</label><input id="seoTitle" name="title" maxlength="180" value="<?=adminEscape($seo['title']??'')?>" required></div><div class="form-group"><label for="seoDescription">Meta description</label><textarea id="seoDescription" name="description" rows="4" maxlength="500" required><?=adminEscape($seo['description']??'')?></textarea></div><div class="form-group"><label for="seoKeywords">Keywords</label><textarea id="seoKeywords" name="keywords" rows="3" maxlength="1000"><?=adminEscape($seo['keywords']??'')?></textarea><div class="field-hint">Comma-separated. Google does not use meta keywords for ranking.</div></div><div class="form-group"><label for="seoLanguage">Page language</label><select id="seoLanguage" name="language"><option value="en" <?=($seo['language']??'en')==='en'?'selected':''?>>English</option><option value="hi" <?=($seo['language']??'')==='hi'?'selected':''?>>Hindi</option></select></div><div class="form-actions"><button type="reset" class="button-secondary">Reset form</button><button type="submit" class="button-primary">Save SEO settings →</button></div></form></article><aside class="panel seo-preview"><span class="preview-label">SEARCH PREVIEW</span><div class="google-preview"><div class="google-site">Floors Gurgaon</div><div class="google-title" id="seoPreviewTitle"><?=adminEscape($seo['title']??'Floors Gurgaon')?></div><div class="google-url">floorsgurgaon.com</div><p id="seoPreviewDescription"><?=adminEscape($seo['description']??'')?></p></div></aside></div></section>
-<section class="page-section" id="section-hero"><div class="section-intro"><span class="section-icon blue">✎</span><div><h2>Hero Content</h2><p>Edit the homepage headline, description and button labels.</p></div></div><div class="editor-layout"><article class="panel editor-panel"><div class="panel-heading"><div><h3>Homepage hero</h3><p>Saved directly to content.json.</p></div></div><form class="admin-form" method="post" action="save.php"><input type="hidden" name="csrf_token" value="<?=adminEscape($_SESSION['csrf_token'])?>"><input type="hidden" name="action" value="hero"><div class="form-group"><label for="heroEyebrow">Small badge text</label><input id="heroEyebrow" name="eyebrow" maxlength="100" value="<?=adminEscape($hero['eyebrow']??'')?>"></div><div class="form-group"><label for="heroHeading">Main heading</label><input id="heroHeading" name="heading" maxlength="180" value="<?=adminEscape($hero['heading']??'')?>" required></div><div class="form-group"><label for="heroDescription">Description</label><textarea id="heroDescription" name="description" rows="4" maxlength="500" required><?=adminEscape($hero['description']??'')?></textarea></div><div class="form-grid"><div class="form-group"><label for="heroPrimary">Primary button</label><input id="heroPrimary" name="primaryButton" maxlength="80" value="<?=adminEscape($hero['primaryButton']??'')?>"></div><div class="form-group"><label for="heroSecondary">Secondary button</label><input id="heroSecondary" name="secondaryButton" maxlength="80" value="<?=adminEscape($hero['secondaryButton']??'')?>"></div></div><div class="form-actions"><button type="reset" class="button-secondary">Reset form</button><button type="submit" class="button-primary">Save hero content →</button></div></form></article><aside class="panel content-tip"><span class="preview-label">CURRENT HEADLINE</span><h3 id="heroPreviewHeading"><?=adminEscape($hero['heading']??'Find Your Perfect Home.')?></h3><p id="heroPreviewDescription"><?=adminEscape($hero['description']??'')?></p></aside></div></section>
-<section class="page-section" id="section-images"><div class="section-intro"><span class="section-icon orange">▧</span><div><h2>Hero Images</h2><p>Upload, replace, edit details, reorder or remove homepage slider images.</p></div></div><div class="notice-box">Supported formats: JPG, PNG, WEBP, GIF. Maximum file size: 8 MB. Keep a backup of <code>data/content.json</code> before managing images.</div><div class="panel image-panel"><div class="panel-heading"><div><h3>Homepage background slides</h3><p><?=count($slides)?> slide(s) configured.</p></div></div><div class="image-grid"><?php foreach($slides as $i=>$slide): $img=ltrim(str_replace('\\','/',(string)($slide['image']??'')),'/'); ?><article class="image-card"><div class="image-preview"><img src="<?=adminEscape('../'.$img)?>" alt="<?=adminEscape($slide['alt']??$slide['label']??'Hero slide')?>" loading="lazy"><span class="image-number">SLIDE <?=str_pad((string)($i+1),2,'0',STR_PAD_LEFT)?></span></div><div class="image-card-body"><div class="image-path"><?=adminEscape($img)?></div><form class="admin-form image-edit-form" method="post" action="save.php" enctype="multipart/form-data"><input type="hidden" name="csrf_token" value="<?=adminEscape($_SESSION['csrf_token'])?>"><input type="hidden" name="action" value="image_update"><input type="hidden" name="index" value="<?=$i?>"><div class="form-group"><label>Slide label</label><input name="label" maxlength="100" value="<?=adminEscape($slide['label']??'')?>" required></div><div class="form-group"><label>Location text</label><input name="location" maxlength="120" value="<?=adminEscape($slide['location']??'')?>"></div><div class="form-group"><label>Image alt text</label><input name="alt" maxlength="180" value="<?=adminEscape($slide['alt']??'')?>"></div><div class="form-group"><label>Replace image (optional)</label><input type="file" name="image_file" accept="image/jpeg,image/png,image/webp,image/gif"><div class="small-help">Leave empty to keep current image.</div></div><div class="image-actions"><button class="button-primary" type="submit">Save slide</button><button class="button-secondary" type="submit" name="move" value="up" <?=($i===0?'disabled':'')?>>↑ Move up</button><button class="button-secondary" type="submit" name="move" value="down" <?=($i===count($slides)-1?'disabled':'')?>>↓ Move down</button></div></form><form method="post" action="save.php" onsubmit="return confirm('Delete this hero slide? This cannot be undone.');"><input type="hidden" name="csrf_token" value="<?=adminEscape($_SESSION['csrf_token'])?>"><input type="hidden" name="action" value="image_delete"><input type="hidden" name="index" value="<?=$i?>"><button type="submit" class="delete-image-button">Delete slide</button></form></div></article><?php endforeach; ?></div></div><div class="panel editor-panel add-image-panel"><div class="panel-heading"><div><h3>＋ Add a new hero slide</h3><p>Upload a new image and add it to the end of the homepage slider.</p></div></div><form class="admin-form" method="post" action="save.php" enctype="multipart/form-data"><input type="hidden" name="csrf_token" value="<?=adminEscape($_SESSION['csrf_token'])?>"><input type="hidden" name="action" value="image_add"><div class="form-grid"><div class="form-group"><label>Slide label</label><input name="label" maxlength="100" required placeholder="Luxury Living"></div><div class="form-group"><label>Location text</label><input name="location" maxlength="120" placeholder="Gurgaon, Haryana"></div></div><div class="form-group"><label>Image alt text</label><input name="alt" maxlength="180" placeholder="Modern luxury builder floor"></div><div class="form-group"><label>Choose image</label><input type="file" name="image_file" accept="image/jpeg,image/png,image/webp,image/gif" required><div class="small-help">JPG, PNG, WEBP or GIF · Maximum 8 MB</div></div><div class="form-actions"><button class="button-primary" type="submit">Upload and add slide →</button></div></form></div></section><section class="page-section" id="section-navigation"><div class="section-intro"><span class="section-icon green">☰</span><div><h2>Navbar Settings</h2><p>Edit brand/contact details and manage links.</p></div></div><article class="panel editor-panel"><div class="panel-heading"><div><h3>Brand and contact information</h3><p>All fields save to content.json.</p></div></div><form class="admin-form" method="post" action="save.php" id="navbarForm"><input type="hidden" name="csrf_token" value="<?=adminEscape($_SESSION['csrf_token'])?>"><input type="hidden" name="action" value="navbar"><div class="form-grid"><div class="form-group"><label for="logoText">Logo text</label><input id="logoText" name="logoText" maxlength="60" value="<?=adminEscape($site['logoText']??'')?>"></div><div class="form-group"><label for="logoHighlight">Logo subtitle</label><input id="logoHighlight" name="logoHighlight" maxlength="60" value="<?=adminEscape($site['logoHighlight']??'')?>"></div></div><div class="form-grid"><div class="form-group"><label for="sitePhone">Contact phone</label><input id="sitePhone" name="phone" maxlength="50" value="<?=adminEscape($site['phone']??'')?>"></div><div class="form-group"><label for="phoneLink">Telephone link (digits with country code)</label><input id="phoneLink" name="phoneLink" maxlength="50" value="<?=adminEscape($site['phoneLink']??'')?>"></div></div><div class="panel-subheading"><h3>Navigation links</h3><p>Add, edit, remove or move links. Their order here becomes the website order.</p></div><div id="navigationEditor"><?php foreach($navigation as $item): ?><div class="nav-editor-row"><span class="drag-handle">☰</span><input name="nav_label[]" aria-label="Link label" placeholder="Link name" maxlength="80" value="<?=adminEscape($item['label']??'')?>" required><input class="nav-url-field" name="nav_url[]" aria-label="Link URL" placeholder="#section or /page.php" maxlength="500" value="<?=adminEscape($item['url']??'')?>" required><button type="button" class="remove-link" title="Remove link" aria-label="Remove link">×</button></div><?php endforeach; ?></div><div class="nav-tools"><button class="add-link" type="button" id="addNavigation">＋ Add link</button><span class="small-help">Use #home for page sections or /page.php for a separate page.</span></div><div class="form-actions"><button type="reset" class="button-secondary" id="resetNavbar">Reset form</button><button type="submit" class="button-primary">Save navbar settings →</button></div></form></article></section><footer class="admin-footer"><span>Floors Gurgaon CMS</span><span>PHP + JSON content management</span></footer></main></div></div>
+$data = is_readable($jsonPath)
+    ? json_decode((string) file_get_contents($jsonPath), true)
+    : null;
+
+if (!is_array($data)) {
+    http_response_code(500);
+    exit('Could not read a valid data/content.json file.');
+}
+
+function adminEscape($value): string
+{
+    return htmlspecialchars(
+        (string) $value,
+        ENT_QUOTES | ENT_SUBSTITUTE,
+        'UTF-8'
+    );
+}
+
+$seo = $data['seo'] ?? [];
+$site = $data['site'] ?? [];
+$hero = $data['hero'] ?? [];
+$slides = $hero['slides'] ?? [];
+$navigation = $data['navigation'] ?? [];
+$saved = (string) ($_GET['saved'] ?? '');
+$error = (string) ($_GET['error'] ?? '');
+?>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Dashboard | Floors Gurgaon</title>
+    <link rel="stylesheet" href="admin.css">
+    <style>
+        .admin-layout {
+            min-height: 100vh;
+        }
+
+        .content-area {
+            padding-bottom: 30px;
+        }
+
+        .notice-box {
+            margin: 18px 0;
+            padding: 13px 16px;
+            border-radius: 10px;
+            background: #fff8e8;
+            color: #765516;
+        }
+
+        .status-message {
+            margin: 14px 0;
+            padding: 13px 16px;
+            border-radius: 10px;
+            background: #e8f8ee;
+            color: #17663b;
+        }
+
+        .status-message.error {
+            background: #fff0f0;
+            color: #a12626;
+        }
+
+        .nav-editor-row {
+            display: grid;
+            grid-template-columns: 32px minmax(130px, 1fr) minmax(180px, 2fr) 42px;
+            gap: 10px;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .nav-editor-row input {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .nav-editor-row button {
+            border: 0;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            background: #ffeded;
+            color: #a12626;
+        }
+
+        .nav-tools {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 14px 0;
+        }
+
+        .nav-tools button {
+            border: 0;
+            border-radius: 8px;
+            padding: 11px 15px;
+            cursor: pointer;
+        }
+
+        .add-link {
+            background: #e8f8ee;
+            color: #17663b;
+        }
+
+        .move-link {
+            background: #edf3ff;
+            color: #244d94;
+        }
+
+        .small-help {
+            font-size: 13px;
+            color: #667085;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .logout-link {
+            color: inherit;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .sidebar-nav a.nav-item {
+            text-decoration: none;
+        }
+
+        .image-grid img {
+            max-width: 100%;
+        }
+
+        .image-edit-form {
+            padding-top: 12px;
+        }
+
+        .image-edit-form .form-group {
+            margin-bottom: 10px;
+        }
+
+        .image-edit-form input[type="file"] {
+            font-size: 12px;
+            max-width: 100%;
+        }
+
+        .image-actions {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+            margin: 12px 0;
+        }
+
+        .image-actions button,
+        .delete-image-button {
+            border: 0;
+            border-radius: 8px;
+            padding: 10px 12px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .image-actions button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .delete-image-button {
+            width: 100%;
+            background: #fff0f0;
+            color: #a12626;
+        }
+
+        .add-image-panel {
+            margin-top: 22px;
+        }
+
+        .image-card-body .image-path {
+            overflow-wrap: anywhere;
+        }
+
+        @media (max-width: 650px) {
+            .nav-editor-row {
+                grid-template-columns: 24px 1fr 36px;
+            }
+
+            .nav-editor-row .nav-url-field {
+                grid-column: 2 / 3;
+            }
+
+            .nav-editor-row button {
+                grid-column: 3;
+                grid-row: 1 / 3;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="admin-layout">
+    <aside class="sidebar" id="sidebar">
+        <a href="../index.php" class="sidebar-brand">
+            <span class="brand-mark">FG</span>
+            <span class="brand-text">
+                <strong>FLOORS</strong>
+                <small>GURGAON CMS</small>
+            </span>
+        </a>
+
+        <div class="sidebar-label">WORKSPACE</div>
+
+        <nav class="sidebar-nav" aria-label="Admin navigation">
+            <button class="nav-item active" data-section="dashboard">
+                <span class="nav-icon">▦</span>
+                Dashboard
+            </button>
+
+            <div class="sidebar-label">WEBSITE MANAGEMENT</div>
+
+            <button class="nav-item" data-section="seo">
+                <span class="nav-icon">⌕</span>
+                SEO Settings
+            </button>
+            <button class="nav-item" data-section="hero">
+                <span class="nav-icon">✎</span>
+                Hero Content
+            </button>
+            <button class="nav-item" data-section="images">
+                <span class="nav-icon">▧</span>
+                Hero Images
+                <span class="nav-count"><?= count($slides) ?></span>
+            </button>
+
+            <a class="nav-item" href="projects.php">
+                <span class="nav-icon">▤</span>
+                Property Sections
+            </a>
+            <a class="nav-item" href="sections.php">
+                <span class="nav-icon">▦</span>
+                Homepage Layout
+            </a>
+
+            <a class="nav-item" href="section-content.php"
+             style="display:block;text-decoration:none">
+              <span class="nav-icon">▦</span>Section Content
+           </a>
+
+            <button class="nav-item" data-section="navigation">
+                <span class="nav-icon">☰</span>
+                Navbar Settings
+            </button>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="sidebar-status">
+                <span class="status-dot"></span>
+                <span>
+                    <strong>JSON CMS</strong>
+                    <small>Content source</small>
+                </span>
+            </div>
+            <a href="../index.php" class="view-site" target="_blank">
+                ↗ &nbsp; View Website
+            </a>
+            <a href="logout.php" class="view-site logout-link">
+                ↪ &nbsp; Log out
+            </a>
+        </div>
+    </aside>
+
+    <div class="main-area">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button
+                    type="button"
+                    class="mobile-menu"
+                    id="mobileMenu"
+                    aria-label="Toggle sidebar"
+                >☰</button>
+                <div>
+                    <div class="breadcrumb">
+                        Workspace / <span id="breadcrumbTitle">Dashboard</span>
+                    </div>
+                    <h1 id="pageHeading">Dashboard Overview</h1>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <a href="../index.php" target="_blank" class="preview-button">
+                    ↗ &nbsp; Preview Website
+                </a>
+                <div class="admin-avatar" title="Administrator">A</div>
+            </div>
+        </header>
+
+        <main class="content-area">
+            <?php if ($saved): ?>
+                <div class="status-message" role="status">
+                    <?= adminEscape($saved) ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($error): ?>
+                <div class="status-message error" role="alert">
+                    <?= adminEscape($error) ?>
+                </div>
+            <?php endif; ?>
+
+            <section class="page-section active" id="section-dashboard">
+                <div class="welcome-banner">
+                    <div>
+                        <span class="eyebrow">YOUR WEBSITE, YOUR CONTROL</span>
+                        <h2>Welcome to your workspace.</h2>
+                        <p>
+                            Manage your website's content, SEO and navigation
+                            from one place.
+                        </p>
+                    </div>
+                    <div class="welcome-decoration">FG</div>
+                </div>
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Website overview</h2>
+                        <p>Current content configuration.</p>
+                    </div>
+                    <span class="live-badge">
+                        <span class="status-dot"></span>
+                        JSON CMS active
+                    </span>
+                </div>
+
+                <div class="stats-grid">
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-icon purple">⌕</span>
+                            <span class="stat-tag">SEO</span>
+                        </div>
+                        <div class="stat-number">01</div>
+                        <h3>SEO Configuration</h3>
+                        <p>Page title and search metadata</p>
+                        <button class="text-link" data-open="seo">
+                            Manage SEO →
+                        </button>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-icon blue">✎</span>
+                            <span class="stat-tag">CONTENT</span>
+                        </div>
+                        <div class="stat-number">01</div>
+                        <h3>Hero Section</h3>
+                        <p>Heading, description and buttons</p>
+                        <button class="text-link" data-open="hero">
+                            Edit content →
+                        </button>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-icon orange">▧</span>
+                            <span class="stat-tag">MEDIA</span>
+                        </div>
+                        <div class="stat-number"><?= count($slides) ?></div>
+                        <h3>Hero Slides</h3>
+                        <p>Configured background images</p>
+                        <button class="text-link" data-open="images">
+                            Review images →
+                        </button>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-icon green">☰</span>
+                            <span class="stat-tag">NAVIGATION</span>
+                        </div>
+                        <div class="stat-number"><?= count($navigation) ?></div>
+                        <h3>Navbar Links</h3>
+                        <p>Website navigation items</p>
+                        <button class="text-link" data-open="navigation">
+                            Manage navbar →
+                        </button>
+                    </article>
+                </div>
+
+                <div class="notice-box">
+                    Changes saved here update <code>data/content.json</code>.
+                    Keep a backup of this file before major edits.
+                </div>
+            </section>
+
+            <section class="page-section" id="section-seo">
+                <div class="section-intro">
+                    <span class="section-icon purple">⌕</span>
+                    <div>
+                        <h2>SEO Settings</h2>
+                        <p>Edit the metadata used by search engines.</p>
+                    </div>
+                </div>
+
+                <div class="editor-layout">
+                    <article class="panel editor-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <h3>Search engine metadata</h3>
+                                <p>Saved directly to content.json.</p>
+                            </div>
+                        </div>
+
+                        <form class="admin-form" method="post" action="save.php">
+                            <input
+                                type="hidden"
+                                name="csrf_token"
+                                value="<?= adminEscape($_SESSION['csrf_token']) ?>"
+                            >
+                            <input type="hidden" name="action" value="seo">
+
+                            <div class="form-group">
+                                <label for="seoTitle">Page title</label>
+                                <input
+                                    id="seoTitle"
+                                    name="title"
+                                    maxlength="180"
+                                    value="<?= adminEscape($seo['title'] ?? '') ?>"
+                                    required
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="seoDescription">Meta description</label>
+                                <textarea
+                                    id="seoDescription"
+                                    name="description"
+                                    rows="4"
+                                    maxlength="500"
+                                    required
+                                ><?= adminEscape($seo['description'] ?? '') ?></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="seoKeywords">Keywords</label>
+                                <textarea
+                                    id="seoKeywords"
+                                    name="keywords"
+                                    rows="3"
+                                    maxlength="1000"
+                                ><?= adminEscape($seo['keywords'] ?? '') ?></textarea>
+                                <div class="field-hint">
+                                    Comma-separated. Google does not use meta
+                                    keywords for ranking.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="seoLanguage">Page language</label>
+                                <select id="seoLanguage" name="language">
+                                    <option
+                                        value="en"
+                                        <?= ($seo['language'] ?? 'en') === 'en' ? 'selected' : '' ?>
+                                    >English</option>
+                                    <option
+                                        value="hi"
+                                        <?= ($seo['language'] ?? '') === 'hi' ? 'selected' : '' ?>
+                                    >Hindi</option>
+                                </select>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="reset" class="button-secondary">
+                                    Reset form
+                                </button>
+                                <button type="submit" class="button-primary">
+                                    Save SEO settings →
+                                </button>
+                            </div>
+                        </form>
+                    </article>
+
+                    <aside class="panel seo-preview">
+                        <span class="preview-label">SEARCH PREVIEW</span>
+                        <div class="google-preview">
+                            <div class="google-site">Floors Gurgaon</div>
+                            <div class="google-title" id="seoPreviewTitle">
+                                <?= adminEscape($seo['title'] ?? 'Floors Gurgaon') ?>
+                            </div>
+                            <div class="google-url">floorsgurgaon.com</div>
+                            <p id="seoPreviewDescription">
+                                <?= adminEscape($seo['description'] ?? '') ?>
+                            </p>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+
+            <section class="page-section" id="section-hero">
+                <div class="section-intro">
+                    <span class="section-icon blue">✎</span>
+                    <div>
+                        <h2>Hero Content</h2>
+                        <p>
+                            Edit the homepage headline, description and button
+                            labels.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="editor-layout">
+                    <article class="panel editor-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <h3>Homepage hero</h3>
+                                <p>Saved directly to content.json.</p>
+                            </div>
+                        </div>
+
+                        <form class="admin-form" method="post" action="save.php">
+                            <input
+                                type="hidden"
+                                name="csrf_token"
+                                value="<?= adminEscape($_SESSION['csrf_token']) ?>"
+                            >
+                            <input type="hidden" name="action" value="hero">
+
+                            <div class="form-group">
+                                <label for="heroEyebrow">Small badge text</label>
+                                <input
+                                    id="heroEyebrow"
+                                    name="eyebrow"
+                                    maxlength="100"
+                                    value="<?= adminEscape($hero['eyebrow'] ?? '') ?>"
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="heroHeading">Main heading</label>
+                                <input
+                                    id="heroHeading"
+                                    name="heading"
+                                    maxlength="180"
+                                    value="<?= adminEscape($hero['heading'] ?? '') ?>"
+                                    required
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="heroDescription">Description</label>
+                                <textarea
+                                    id="heroDescription"
+                                    name="description"
+                                    rows="4"
+                                    maxlength="500"
+                                    required
+                                ><?= adminEscape($hero['description'] ?? '') ?></textarea>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="heroPrimary">Primary button</label>
+                                    <input
+                                        id="heroPrimary"
+                                        name="primaryButton"
+                                        maxlength="80"
+                                        value="<?= adminEscape($hero['primaryButton'] ?? '') ?>"
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <label for="heroSecondary">Secondary button</label>
+                                    <input
+                                        id="heroSecondary"
+                                        name="secondaryButton"
+                                        maxlength="80"
+                                        value="<?= adminEscape($hero['secondaryButton'] ?? '') ?>"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="reset" class="button-secondary">
+                                    Reset form
+                                </button>
+                                <button type="submit" class="button-primary">
+                                    Save hero content →
+                                </button>
+                            </div>
+                        </form>
+                    </article>
+
+                    <aside class="panel content-tip">
+                        <span class="preview-label">CURRENT HEADLINE</span>
+                        <h3 id="heroPreviewHeading">
+                            <?= adminEscape($hero['heading'] ?? 'Find Your Perfect Home.') ?>
+                        </h3>
+                        <p id="heroPreviewDescription">
+                            <?= adminEscape($hero['description'] ?? '') ?>
+                        </p>
+                    </aside>
+                </div>
+            </section>
+
+            <section class="page-section" id="section-images">
+                <div class="section-intro">
+                    <span class="section-icon orange">▧</span>
+                    <div>
+                        <h2>Hero Images</h2>
+                        <p>
+                            Upload, replace, edit details, reorder or remove
+                            homepage slider images.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="notice-box">
+                    Supported formats: JPG, PNG, WEBP, GIF. Maximum file size:
+                    8 MB. Keep a backup of <code>data/content.json</code>
+                    before managing images.
+                </div>
+
+                <div class="panel image-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Homepage background slides</h3>
+                            <p><?= count($slides) ?> slide(s) configured.</p>
+                        </div>
+                    </div>
+
+                    <div class="image-grid">
+                        <?php foreach ($slides as $index => $slide): ?>
+                            <?php
+                            $imagePath = ltrim(
+                                str_replace('\\', '/', (string) ($slide['image'] ?? '')),
+                                '/'
+                            );
+                            ?>
+                            <article class="image-card">
+                                <div class="image-preview">
+                                    <img
+                                        src="<?= adminEscape('../' . $imagePath) ?>"
+                                        alt="<?= adminEscape($slide['alt'] ?? $slide['label'] ?? 'Hero slide') ?>"
+                                        loading="lazy"
+                                    >
+                                    <span class="image-number">
+                                        SLIDE <?= str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) ?>
+                                    </span>
+                                </div>
+
+                                <div class="image-card-body">
+                                    <div class="image-path">
+                                        <?= adminEscape($imagePath) ?>
+                                    </div>
+
+                                    <form
+                                        class="admin-form image-edit-form"
+                                        method="post"
+                                        action="save.php"
+                                        enctype="multipart/form-data"
+                                    >
+                                        <input
+                                            type="hidden"
+                                            name="csrf_token"
+                                            value="<?= adminEscape($_SESSION['csrf_token']) ?>"
+                                        >
+                                        <input type="hidden" name="action" value="image_update">
+                                        <input type="hidden" name="index" value="<?= $index ?>">
+
+                                        <div class="form-group">
+                                            <label>Slide label</label>
+                                            <input
+                                                name="label"
+                                                maxlength="100"
+                                                value="<?= adminEscape($slide['label'] ?? '') ?>"
+                                                required
+                                            >
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Location text</label>
+                                            <input
+                                                name="location"
+                                                maxlength="120"
+                                                value="<?= adminEscape($slide['location'] ?? '') ?>"
+                                            >
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Image alt text</label>
+                                            <input
+                                                name="alt"
+                                                maxlength="180"
+                                                value="<?= adminEscape($slide['alt'] ?? '') ?>"
+                                            >
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Replace image (optional)</label>
+                                            <input
+                                                type="file"
+                                                name="image_file"
+                                                accept="image/jpeg,image/png,image/webp,image/gif"
+                                            >
+                                            <div class="small-help">
+                                                Leave empty to keep current image.
+                                            </div>
+                                        </div>
+
+                                        <div class="image-actions">
+                                            <button class="button-primary" type="submit">
+                                                Save slide
+                                            </button>
+                                            <button
+                                                class="button-secondary"
+                                                type="submit"
+                                                name="move"
+                                                value="up"
+                                                <?= $index === 0 ? 'disabled' : '' ?>
+                                            >↑ Move up</button>
+                                            <button
+                                                class="button-secondary"
+                                                type="submit"
+                                                name="move"
+                                                value="down"
+                                                <?= $index === count($slides) - 1 ? 'disabled' : '' ?>
+                                            >↓ Move down</button>
+                                        </div>
+                                    </form>
+
+                                    <form
+                                        method="post"
+                                        action="save.php"
+                                        onsubmit="return confirm('Delete this hero slide? This cannot be undone.');"
+                                    >
+                                        <input
+                                            type="hidden"
+                                            name="csrf_token"
+                                            value="<?= adminEscape($_SESSION['csrf_token']) ?>"
+                                        >
+                                        <input type="hidden" name="action" value="image_delete">
+                                        <input type="hidden" name="index" value="<?= $index ?>">
+                                        <button
+                                            type="submit"
+                                            class="delete-image-button"
+                                        >Delete slide</button>
+                                    </form>
+                                </div>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+
+                <div class="panel editor-panel add-image-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>＋ Add a new hero slide</h3>
+                            <p>
+                                Upload a new image and add it to the end of the
+                                homepage slider.
+                            </p>
+                        </div>
+                    </div>
+
+                    <form
+                        class="admin-form"
+                        method="post"
+                        action="save.php"
+                        enctype="multipart/form-data"
+                    >
+                        <input
+                            type="hidden"
+                            name="csrf_token"
+                            value="<?= adminEscape($_SESSION['csrf_token']) ?>"
+                        >
+                        <input type="hidden" name="action" value="image_add">
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Slide label</label>
+                                <input
+                                    name="label"
+                                    maxlength="100"
+                                    required
+                                    placeholder="Luxury Living"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>Location text</label>
+                                <input
+                                    name="location"
+                                    maxlength="120"
+                                    placeholder="Gurgaon, Haryana"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Image alt text</label>
+                            <input
+                                name="alt"
+                                maxlength="180"
+                                placeholder="Modern luxury builder floor"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Choose image</label>
+                            <input
+                                type="file"
+                                name="image_file"
+                                accept="image/jpeg,image/png,image/webp,image/gif"
+                                required
+                            >
+                            <div class="small-help">
+                                JPG, PNG, WEBP or GIF · Maximum 8 MB
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="button-primary" type="submit">
+                                Upload and add slide →
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section class="page-section" id="section-navigation">
+                <div class="section-intro">
+                    <span class="section-icon green">☰</span>
+                    <div>
+                        <h2>Navbar Settings</h2>
+                        <p>Edit brand/contact details and manage links.</p>
+                    </div>
+                </div>
+
+                <article class="panel editor-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Brand and contact information</h3>
+                            <p>All fields save to content.json.</p>
+                        </div>
+                    </div>
+
+                    <form
+                        class="admin-form"
+                        method="post"
+                        action="save.php"
+                        id="navbarForm"
+                    >
+                        <input
+                            type="hidden"
+                            name="csrf_token"
+                            value="<?= adminEscape($_SESSION['csrf_token']) ?>"
+                        >
+                        <input type="hidden" name="action" value="navbar">
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="logoText">Logo text</label>
+                                <input
+                                    id="logoText"
+                                    name="logoText"
+                                    maxlength="60"
+                                    value="<?= adminEscape($site['logoText'] ?? '') ?>"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="logoHighlight">Logo subtitle</label>
+                                <input
+                                    id="logoHighlight"
+                                    name="logoHighlight"
+                                    maxlength="60"
+                                    value="<?= adminEscape($site['logoHighlight'] ?? '') ?>"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="sitePhone">Contact phone</label>
+                                <input
+                                    id="sitePhone"
+                                    name="phone"
+                                    maxlength="50"
+                                    value="<?= adminEscape($site['phone'] ?? '') ?>"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="phoneLink">
+                                    Telephone link (digits with country code)
+                                </label>
+                                <input
+                                    id="phoneLink"
+                                    name="phoneLink"
+                                    maxlength="50"
+                                    value="<?= adminEscape($site['phoneLink'] ?? '') ?>"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="panel-subheading">
+                            <h3>Navigation links</h3>
+                            <p>
+                                Add, edit, remove or move links. Their order
+                                here becomes the website order.
+                            </p>
+                        </div>
+
+                        <div id="navigationEditor">
+                            <?php foreach ($navigation as $item): ?>
+                                <div class="nav-editor-row">
+                                    <span class="drag-handle">☰</span>
+                                    <input
+                                        name="nav_label[]"
+                                        aria-label="Link label"
+                                        placeholder="Link name"
+                                        maxlength="80"
+                                        value="<?= adminEscape($item['label'] ?? '') ?>"
+                                        required
+                                    >
+                                    <input
+                                        class="nav-url-field"
+                                        name="nav_url[]"
+                                        aria-label="Link URL"
+                                        placeholder="#section or /page.php"
+                                        maxlength="500"
+                                        value="<?= adminEscape($item['url'] ?? '') ?>"
+                                        required
+                                    >
+                                    <button
+                                        type="button"
+                                        class="remove-link"
+                                        title="Remove link"
+                                        aria-label="Remove link"
+                                    >×</button>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <div class="nav-tools">
+                            <button
+                                class="add-link"
+                                type="button"
+                                id="addNavigation"
+                            >＋ Add link</button>
+                            <span class="small-help">
+                                Use #home for page sections or /page.php for a
+                                separate page.
+                            </span>
+                        </div>
+
+                        <div class="form-actions">
+                            <button
+                                type="reset"
+                                class="button-secondary"
+                                id="resetNavbar"
+                            >Reset form</button>
+                            <button type="submit" class="button-primary">
+                                Save navbar settings →
+                            </button>
+                        </div>
+                    </form>
+                </article>
+            </section>
+
+            <footer class="admin-footer">
+                <span>Floors Gurgaon CMS</span>
+                <span>PHP + JSON content management</span>
+            </footer>
+        </main>
+    </div>
+</div>
+
 <script>
-document.addEventListener('DOMContentLoaded',()=>{const navItems=document.querySelectorAll('[data-section]'),openButtons=document.querySelectorAll('[data-open]'),sections=document.querySelectorAll('.page-section'),sidebar=document.getElementById('sidebar');const titles={dashboard:'Dashboard Overview',seo:'SEO Settings',hero:'Hero Content',images:'Hero Images',navigation:'Navbar Settings'};function openSection(name){if(!titles[name])return;sections.forEach(s=>s.classList.toggle('active',s.id==='section-'+name));navItems.forEach(n=>n.classList.toggle('active',n.dataset.section===name));document.getElementById('pageHeading').textContent=titles[name];document.getElementById('breadcrumbTitle').textContent=titles[name];sidebar.classList.remove('mobile-open');window.scrollTo({top:0,behavior:'smooth'});}navItems.forEach(n=>n.addEventListener('click',()=>openSection(n.dataset.section)));openButtons.forEach(b=>b.addEventListener('click',()=>openSection(b.dataset.open)));document.getElementById('mobileMenu')?.addEventListener('click',()=>sidebar.classList.toggle('mobile-open'));if(location.hash==='#section-images')openSection('images');
-const title=document.getElementById('seoTitle'),desc=document.getElementById('seoDescription');title?.addEventListener('input',()=>document.getElementById('seoPreviewTitle').textContent=title.value||'Your website title');desc?.addEventListener('input',()=>document.getElementById('seoPreviewDescription').textContent=desc.value||'Your website description');const hh=document.getElementById('heroHeading'),hd=document.getElementById('heroDescription');hh?.addEventListener('input',()=>document.getElementById('heroPreviewHeading').textContent=hh.value||'Your hero heading');hd?.addEventListener('input',()=>document.getElementById('heroPreviewDescription').textContent=hd.value||'Your hero description');
-const editor=document.getElementById('navigationEditor');function makeRow(label='',url=''){const row=document.createElement('div');row.className='nav-editor-row';row.innerHTML='<span class="drag-handle">☰</span><input name="nav_label[]" aria-label="Link label" placeholder="Link name" maxlength="80" required><input class="nav-url-field" name="nav_url[]" aria-label="Link URL" placeholder="#section or /page.php" maxlength="500" required><button type="button" class="remove-link" title="Remove link" aria-label="Remove link">×</button>';row.querySelector('[name="nav_label[]"]').value=label;row.querySelector('[name="nav_url[]"]').value=url;return row;}document.getElementById('addNavigation')?.addEventListener('click',()=>{if(editor.children.length>=30){alert('Maximum 30 links allowed.');return;}editor.appendChild(makeRow());editor.lastElementChild.querySelector('input').focus();});editor?.addEventListener('click',e=>{const btn=e.target.closest('.remove-link');if(btn){btn.closest('.nav-editor-row').remove();}});editor?.addEventListener('click',e=>{const handle=e.target.closest('.drag-handle');if(!handle)return;const row=handle.closest('.nav-editor-row');const next=row.nextElementSibling;if(next){editor.insertBefore(next,row);}else if(row.previousElementSibling){editor.insertBefore(row,row.previousElementSibling);}});document.getElementById('navbarForm')?.addEventListener('submit',e=>{if(editor.children.length>30){e.preventDefault();alert('Maximum 30 links allowed.');}});});
-</script></body></html>
+document.addEventListener('DOMContentLoaded', () => {
+    const navItems = document.querySelectorAll('[data-section]');
+    const openButtons = document.querySelectorAll('[data-open]');
+    const sections = document.querySelectorAll('.page-section');
+    const sidebar = document.getElementById('sidebar');
+    const titles = {
+        dashboard: 'Dashboard Overview',
+        seo: 'SEO Settings',
+        hero: 'Hero Content',
+        images: 'Hero Images',
+        navigation: 'Navbar Settings'
+    };
+
+    function openSection(name) {
+        if (!titles[name]) {
+            return;
+        }
+
+        sections.forEach((section) => {
+            section.classList.toggle(
+                'active',
+                section.id === `section-${name}`
+            );
+        });
+
+        navItems.forEach((navItem) => {
+            navItem.classList.toggle(
+                'active',
+                navItem.dataset.section === name
+            );
+        });
+
+        document.getElementById('pageHeading').textContent = titles[name];
+        document.getElementById('breadcrumbTitle').textContent = titles[name];
+        sidebar.classList.remove('mobile-open');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    navItems.forEach((navItem) => {
+        navItem.addEventListener('click', () => {
+            openSection(navItem.dataset.section);
+        });
+    });
+
+    openButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            openSection(button.dataset.open);
+        });
+    });
+
+    document.getElementById('mobileMenu')?.addEventListener('click', () => {
+        sidebar.classList.toggle('mobile-open');
+    });
+
+    if (location.hash === '#section-images') {
+        openSection('images');
+    }
+
+    const seoTitle = document.getElementById('seoTitle');
+    const seoDescription = document.getElementById('seoDescription');
+
+    seoTitle?.addEventListener('input', () => {
+        document.getElementById('seoPreviewTitle').textContent =
+            seoTitle.value || 'Your website title';
+    });
+
+    seoDescription?.addEventListener('input', () => {
+        document.getElementById('seoPreviewDescription').textContent =
+            seoDescription.value || 'Your website description';
+    });
+
+    const heroHeading = document.getElementById('heroHeading');
+    const heroDescription = document.getElementById('heroDescription');
+
+    heroHeading?.addEventListener('input', () => {
+        document.getElementById('heroPreviewHeading').textContent =
+            heroHeading.value || 'Your hero heading';
+    });
+
+    heroDescription?.addEventListener('input', () => {
+        document.getElementById('heroPreviewDescription').textContent =
+            heroDescription.value || 'Your hero description';
+    });
+
+    const editor = document.getElementById('navigationEditor');
+
+    function makeRow(label = '', url = '') {
+        const row = document.createElement('div');
+        row.className = 'nav-editor-row';
+        row.innerHTML =
+            '<span class="drag-handle">☰</span>' +
+            '<input name="nav_label[]" aria-label="Link label" ' +
+            'placeholder="Link name" maxlength="80" required>' +
+            '<input class="nav-url-field" name="nav_url[]" ' +
+            'aria-label="Link URL" placeholder="#section or /page.php" ' +
+            'maxlength="500" required>' +
+            '<button type="button" class="remove-link" ' +
+            'title="Remove link" aria-label="Remove link">×</button>';
+
+        row.querySelector('[name="nav_label[]"]').value = label;
+        row.querySelector('[name="nav_url[]"]').value = url;
+
+        return row;
+    }
+
+    document.getElementById('addNavigation')?.addEventListener('click', () => {
+        if (editor.children.length >= 30) {
+            alert('Maximum 30 links allowed.');
+            return;
+        }
+
+        editor.appendChild(makeRow());
+        editor.lastElementChild.querySelector('input').focus();
+    });
+
+    editor?.addEventListener('click', (event) => {
+        const button = event.target.closest('.remove-link');
+
+        if (button) {
+            button.closest('.nav-editor-row').remove();
+        }
+    });
+
+    editor?.addEventListener('click', (event) => {
+        const handle = event.target.closest('.drag-handle');
+
+        if (!handle) {
+            return;
+        }
+
+        const row = handle.closest('.nav-editor-row');
+        const nextRow = row.nextElementSibling;
+
+        if (nextRow) {
+            editor.insertBefore(nextRow, row);
+        } else if (row.previousElementSibling) {
+            editor.insertBefore(row, row.previousElementSibling);
+        }
+    });
+
+    document.getElementById('navbarForm')?.addEventListener('submit', (event) => {
+        if (editor.children.length > 30) {
+            event.preventDefault();
+            alert('Maximum 30 links allowed.');
+        }
+    });
+});
+</script>
+</body>
+</html>

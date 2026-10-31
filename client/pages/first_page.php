@@ -79,6 +79,33 @@ if (!is_array($slides)) {
     $slides = [];
 }
 
+$homepageSectionKeys = ['projects', 'builders', 'locations', 'investment'];
+$homepageLayout = $data['homepageLayout'] ?? [];
+$homepageSectionOrder = $homepageLayout['order'] ?? $homepageSectionKeys;
+
+if (!is_array($homepageSectionOrder)) {
+    $homepageSectionOrder = $homepageSectionKeys;
+}
+
+$homepageSectionOrder = array_values(array_unique(array_filter(
+    $homepageSectionOrder,
+    function ($key) use ($homepageSectionKeys) {
+        return is_string($key) && in_array($key, $homepageSectionKeys, true);
+    }
+)));
+
+foreach ($homepageSectionKeys as $sectionKey) {
+    if (!in_array($sectionKey, $homepageSectionOrder, true)) {
+        $homepageSectionOrder[] = $sectionKey;
+    }
+}
+
+$homepageSectionEnabled = $homepageLayout['enabled'] ?? [];
+
+if (!is_array($homepageSectionEnabled)) {
+    $homepageSectionEnabled = [];
+}
+
 // Keep only valid slide objects with an image path.
 $slides = array_values(array_filter($slides, function ($slide) {
     return is_array($slide)
@@ -128,6 +155,8 @@ $firstSlide = $slides[0] ?? [];
 
     <!-- Main stylesheet -->
     <link rel="stylesheet" href="client/css/style.css">
+    <link rel="stylesheet" href="client/css/project-sections.css">
+    <link rel="stylesheet" href="client/css/information-sections.css">
 </head>
 
 <body>
@@ -388,25 +417,24 @@ $firstSlide = $slides[0] ?? [];
         </section>
 
 
-        <!-- Temporary sections for navigation testing -->
+        <?php foreach ($homepageSectionOrder as $sectionKey): ?>
+            <?php
+            if (
+                array_key_exists($sectionKey, $homepageSectionEnabled)
+                && empty($homepageSectionEnabled[$sectionKey])
+            ) {
+                continue;
+            }
 
-        <section class="placeholder-section" id="projects">
-            <div class="container">
-                <span class="section-kicker">OUR COLLECTION</span>
-                <h2>Explore Our Premium Properties</h2>
-                <p>Property cards will be added in the next development step.</p>
-            </div>
-        </section>
+            if ($sectionKey === 'projects') {
+                require __DIR__ . '/../Component/project-sections.php';
+                continue;
+            }
 
-        <section
-            class="placeholder-section alternate-section"
-            id="locations"
-        >
-            <div class="container">
-                <span class="section-kicker">PRIME LOCATIONS</span>
-                <h2>Find a Location That Fits Your Lifestyle</h2>
-            </div>
-        </section>
+            $informationSectionKey = $sectionKey;
+            require __DIR__ . '/../Component/information-sections.php';
+            ?>
+        <?php endforeach; ?>
 
         <section class="placeholder-section" id="about">
             <div class="container">
@@ -430,6 +458,7 @@ $firstSlide = $slides[0] ?? [];
 
     <!-- Main JavaScript -->
     <script src="client/js/script.js" defer></script>
+    <script src="client/js/project-sections.js" defer></script>
 
 </body>
 </html>

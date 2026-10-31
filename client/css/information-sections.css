@@ -1,0 +1,407 @@
+/* COMMON SECTION STYLES */
+
+.info-section {
+    padding: 75px 0;
+    background: #f7f8fa;
+}
+
+.info-section:nth-of-type(even) {
+    background: #fff;
+}
+
+.info-container {
+    width: min(92%, 1440px);
+    margin: auto;
+}
+
+.info-heading-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.info-heading,
+.info-heading-row > div {
+    margin-bottom: 30px;
+}
+
+.info-heading h2,
+.info-heading-row h2 {
+    font-size: clamp(27px, 3vw, 43px);
+    line-height: 1.2;
+    color: #333;
+    font-weight: 800;
+    margin-bottom: 22px;
+}
+
+.info-heading-row h2 span {
+    color: #c94736;
+}
+
+.info-heading p,
+.info-heading-row p {
+    color: #666;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.heading-icon {
+    color: #c94736;
+    margin-right: 7px;
+}
+
+.info-view-all,
+.info-bottom-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 23px;
+    border-radius: 7px;
+    background: #c94736;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    transition: .3s ease;
+    white-space: nowrap;
+}
+
+.info-view-all:hover,
+.info-bottom-button:hover {
+    background: #a93426;
+    transform: translateY(-3px);
+}
+
+
+/* BUILDER CARDS */
+
+.builder-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.builder-card {
+    min-height: 210px;
+    padding: 25px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid #dedede;
+    border-radius: 15px;
+    color: #292929;
+    text-decoration: none;
+    box-shadow: 0 5px 14px rgba(0,0,0,.045);
+    transition: .35s ease;
+}
+
+.builder-card:hover {
+    transform: translateY(-7px);
+    border-color: #c94736;
+    box-shadow: 0 13px 28px rgba(0,0,0,.09);
+}
+
+.builder-icon {
+    width: 78px;
+    height: 78px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #fbefed;
+    color: #c94736;
+    font-size: 34px;
+    font-weight: 800;
+    transition: .3s ease;
+}
+
+.builder-card:hover .builder-icon {
+    background: #c94736;
+    color: #fff;
+    transform: scale(1.08) rotate(-5deg);
+}
+
+.builder-card strong {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.builder-card small {
+    font-size: 14px;
+    color: #777;
+}
+
+
+/* LOCATION CARDS */
+
+.location-section {
+    background: #f7f8fa;
+}
+
+.location-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.location-card {
+    min-height: 142px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid #dedede;
+    border-radius: 13px;
+    text-align: center;
+    color: #292929;
+    text-decoration: none;
+    transition: .3s ease;
+}
+
+.location-card:hover {
+    transform: translateY(-5px);
+    border-color: #c94736;
+    box-shadow: 0 10px 24px rgba(0,0,0,.07);
+}
+
+.location-icon {
+    color: #c94736;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.location-card strong {
+    font-size: 17px;
+}
+
+.location-card small {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #777;
+}
+
+.location-card.featured {
+    background: #c94736;
+    border-color: #c94736;
+    color: #fff;
+}
+
+.location-card.featured .location-icon,
+.location-card.featured small {
+    color: #fff;
+}
+
+.location-card.featured:hover {
+    background: #a93426;
+}
+
+.location-section .info-bottom-button {
+    margin-top: 30px;
+}
+
+
+/* INVESTMENT STATS */
+
+.investment-section {
+    background: #fff;
+}
+
+.investment-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.investment-stat {
+    min-height: 140px;
+    padding: 24px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.07);
+    transition: .3s ease;
+}
+
+.investment-stat:hover {
+    transform: translateY(-5px);
+}
+
+.investment-stat strong {
+    font-size: 36px;
+    color: #c94736;
+    font-weight: 900;
+}
+
+.investment-stat span {
+    color: #666;
+    font-size: 15px;
+    text-align: center;
+}
+
+
+/* BENEFIT CARDS */
+
+.investment-benefits {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.investment-benefit {
+    padding: 24px 22px;
+    min-height: 170px;
+    border: 1px solid #dedede;
+    border-radius: 13px;
+    background: #fff;
+    transition: .3s ease;
+}
+
+.investment-benefit:hover {
+    transform: translateY(-5px);
+    border-color: #c94736;
+    box-shadow: 0 10px 25px rgba(0,0,0,.06);
+}
+
+.investment-benefit h3 {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #303030;
+    font-size: 17px;
+    margin-bottom: 14px;
+}
+
+.investment-benefit h3 span {
+    color: #c94736;
+    font-size: 20px;
+}
+
+.investment-benefit p {
+    color: #666;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.investment-section .info-bottom-button {
+    margin-top: 22px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 1050px) {
+    .builder-grid,
+    .investment-stats,
+    .investment-benefits {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .location-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .info-section {
+        padding: 48px 0;
+    }
+
+    .info-container {
+        width: 90%;
+    }
+
+    .info-heading-row {
+        flex-direction: column;
+    }
+
+    .info-heading h2,
+    .info-heading-row h2 {
+        font-size: 28px;
+        margin-bottom: 14px;
+    }
+
+    .info-heading p,
+    .info-heading-row p {
+        font-size: 14px;
+    }
+
+    .builder-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .builder-card {
+        min-height: 165px;
+        padding: 18px 10px;
+    }
+
+    .builder-icon {
+        width: 62px;
+        height: 62px;
+        font-size: 27px;
+    }
+
+    .builder-card strong {
+        font-size: 15px;
+        text-align: center;
+    }
+
+    .builder-card small {
+        font-size: 12px;
+    }
+
+    .location-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .location-card {
+        min-height: 125px;
+    }
+
+    .investment-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .investment-stat {
+        min-height: 115px;
+    }
+
+    .investment-stat strong {
+        font-size: 29px;
+    }
+
+    .investment-benefits {
+        grid-template-columns: 1fr;
+        gap: 13px;
+    }
+
+    .investment-benefit {
+        min-height: auto;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .builder-card,
+    .builder-icon,
+    .location-card,
+    .investment-stat,
+    .investment-benefit,
+    .info-view-all,
+    .info-bottom-button {
+        transition: none;
+    }
+}
