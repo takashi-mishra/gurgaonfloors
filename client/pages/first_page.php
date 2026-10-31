@@ -157,6 +157,8 @@ $firstSlide = $slides[0] ?? [];
     <link rel="stylesheet" href="client/css/style.css">
     <link rel="stylesheet" href="client/css/project-sections.css">
     <link rel="stylesheet" href="client/css/information-sections.css">
+    <link rel="stylesheet" href="client/css/faq.css">
+    <link rel="stylesheet" href="client/css/footer.css">
 </head>
 
 <body>
@@ -436,22 +438,11 @@ $firstSlide = $slides[0] ?? [];
             ?>
         <?php endforeach; ?>
 
-        <section class="placeholder-section" id="about">
-            <div class="container">
-                <span class="section-kicker">ABOUT US</span>
-                <h2>Discover Floors Gurgaon</h2>
-            </div>
-        </section>
+       <?php
+             require dirname(__DIR__) . '/Component/faq-section.php';
+        ?>
 
-        <section
-            class="placeholder-section alternate-section"
-            id="contact"
-        >
-            <div class="container">
-                <span class="section-kicker">GET IN TOUCH</span>
-                <h2>Let's Find Your Perfect Home</h2>
-            </div>
-        </section>
+        <?php require __DIR__ . '/../Component/footer.php'; ?>
 
     </main>
 
@@ -459,6 +450,7 @@ $firstSlide = $slides[0] ?? [];
     <!-- Main JavaScript -->
     <script src="client/js/script.js" defer></script>
     <script src="client/js/project-sections.js" defer></script>
+    <script src="client/js/faq.js" defer></script>
 
 </body>
 </html>

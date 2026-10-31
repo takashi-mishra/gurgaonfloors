@@ -331,5 +331,146 @@
             "locations": true,
             "investment": true
         }
+    },
+    "faqSection": {
+        "id": "faq",
+        "eyebrow": "NEED TO KNOW MORE?",
+        "title": "Frequently Asked Questions",
+        "description": "Find answers to common questions about luxury builder floors in Gurgaon.",
+        "bottomText": "Still have questions? Contact our team for more information.",
+        "items": [
+            {
+                "question": "What are the top luxury floors in Gurgaon?",
+                "answer": "Some of the top luxury floors in Gurgaon include DLF Imperial Residences, DLF The Grove and DLF Royale Residences, Birla Navya, Adani Samsara, Spiti Homes, ROF Pravasa known for premium design and prime locations.",
+                "enabled": true
+            },
+            {
+                "question": "What are the latest luxury floors in Gurgaon?",
+                "answer": "New launches and availability can change frequently. Check the latest project listings on this website or contact our team for current details.",
+                "enabled": true
+            },
+            {
+                "question": "What is the starting cost of luxury floors in Gurgaon?",
+                "answer": "Prices vary by sector, builder, property size, specifications and availability. Refer to each project card for its displayed starting price and request the latest price list before making a decision.",
+                "enabled": true
+            },
+            {
+                "question": "What is the starting size of luxury floors in Gurgaon?",
+                "answer": "Sizes differ across projects and configurations. Check the individual project details for the available area options.",
+                "enabled": true
+            },
+            {
+                "question": "What are the benefits of investing in luxury floors in Gurgaon?",
+                "answer": "Buyers often consider location, connectivity, privacy, construction quality, amenities and potential rental demand. Investment outcomes are not guaranteed, so review property documents and market conditions carefully.",
+                "enabled": true
+            },
+            {
+                "question": "What are the top under construction floors in Gurgaon?",
+                "answer": "Compare under-construction projects by developer track record, construction progress, approvals, possession timeline and payment terms. Verify details directly with the developer.",
+                "enabled": true
+            },
+            {
+                "question": "What amenities are commonly offered in luxury floors in Gurgaon?",
+                "answer": "Depending on the project, amenities may include lifts, dedicated parking, security, power backup, landscaped areas, smart-home features and club facilities.",
+                "enabled": true
+            },
+            {
+                "question": "Are 3 BHK floors in Gurgaon available within gated societies?",
+                "answer": "Some projects offer 3 BHK options in gated or managed communities. Availability depends on the project and current inventory.",
+                "enabled": true
+            },
+            {
+                "question": "What are the common configurations available in luxury floors in Gurgaon?",
+                "answer": "Common configurations can include 2 BHK, 3 BHK and 4 BHK layouts. Exact options vary by project.",
+                "enabled": true
+            },
+            {
+                "question": "Are luxury floors in Gurgaon RERA registered?",
+                "answer": "RERA registration depends on the individual project and applicable requirements. Verify the project's registration details on the official Haryana RERA portal before booking.",
+                "enabled": true
+            }
+        ]
+    },
+    "footerSection": {
+        "ctaEyebrow": "YOUR DREAM HOME STARTS HERE",
+        "ctaTitle": "Find Your Perfect Builder Floor in Gurgaon",
+        "ctaDescription": "Browse our complete inventory — detailed floor plans, pricing and free site visits available across all prime sectors.",
+        "ctaButton": "Browse All Builder Floors",
+        "expertTitleHighlight": "Connect With Our",
+        "expertTitle": "Property Expert",
+        "expertSubtitle": "Trusted by Buyers | Market Expert",
+        "expertDescription": "We deal in residential and commercial properties in Gurgaon. We offer our clients smarter, faster and reliable real estate services.",
+        "expertButton": "Contact Now",
+        "phone": "9911922656",
+        "whatsapp": "8123002828",
+        "logoText": "FLOORS",
+        "logoHighlight": "GURGAON",
+        "brandDescription": "Find premium builder floors in Gurgaon. Explore trusted developers, prime locations and luxury homes.",
+        "copyright": "All Rights Reserved.",
+        "privacyUrl": "#privacy",
+        "enabled": true,
+        "mobileBarEnabled": true,
+        "features": [
+            {
+                "icon": "🏡",
+                "title": "Understand Localities",
+                "description": "Discover and get to know different localities"
+            },
+            {
+                "icon": "📈",
+                "title": "Get Price Trends",
+                "description": "Get to know and analyse property market trends"
+            },
+            {
+                "icon": "🛣️",
+                "title": "Discover Property Opportunities",
+                "description": "Explore upcoming locations and developments"
+            },
+            {
+                "icon": "💬",
+                "title": "Get Insights from Residents",
+                "description": "Know what residents say about different localities"
+            }
+        ],
+        "quickLinks": [
+            {
+                "label": "Home",
+                "url": "#home"
+            },
+            {
+                "label": "Projects",
+                "url": "#projects"
+            },
+            {
+                "label": "Locations",
+                "url": "#locations"
+            },
+            {
+                "label": "About Us",
+                "url": "#about"
+            },
+            {
+                "label": "Contact",
+                "url": "#contact"
+            }
+        ],
+        "exploreLinks": [
+            {
+                "label": "New Launches",
+                "url": "#projects"
+            },
+            {
+                "label": "Top Builders",
+                "url": "#builders"
+            },
+            {
+                "label": "FAQs",
+                "url": "#faq"
+            },
+            {
+                "label": "Investment Benefits",
+                "url": "#investment"
+            }
+        ]
     }
 }

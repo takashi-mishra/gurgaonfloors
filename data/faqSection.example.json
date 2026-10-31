@@ -1,0 +1,51 @@
+{
+    "faqSection": {
+        "id": "faq",
+        "eyebrow": "NEED TO KNOW MORE?",
+        "title": "Frequently Asked Questions",
+        "description": "Find answers to common questions about luxury builder floors in Gurgaon.",
+        "bottomText": "Still have questions? Contact our team for more information.",
+        "items": [
+            {
+                "question": "What are the top luxury floors in Gurgaon?",
+                "answer": "The right property depends on your preferred location, budget, configuration and amenities. Explore the listed projects and compare their details before shortlisting a home."
+            },
+            {
+                "question": "What are the latest luxury floors in Gurgaon?",
+                "answer": "New launches and availability can change frequently. Check the latest project listings on this website or contact our team for current details."
+            },
+            {
+                "question": "What is the starting cost of luxury floors in Gurgaon?",
+                "answer": "Prices vary by sector, builder, property size, specifications and availability. Refer to each project card for its displayed starting price and request the latest price list before making a decision."
+            },
+            {
+                "question": "What is the starting size of luxury floors in Gurgaon?",
+                "answer": "Sizes differ across projects and configurations. Check the individual project details for the available area options."
+            },
+            {
+                "question": "What are the benefits of investing in luxury floors in Gurgaon?",
+                "answer": "Buyers often consider location, connectivity, privacy, construction quality, amenities and potential rental demand. Investment outcomes are not guaranteed, so review property documents and market conditions carefully."
+            },
+            {
+                "question": "What are the top under construction floors in Gurgaon?",
+                "answer": "Compare under-construction projects by developer track record, construction progress, approvals, possession timeline and payment terms. Verify details directly with the developer."
+            },
+            {
+                "question": "What amenities are commonly offered in luxury floors in Gurgaon?",
+                "answer": "Depending on the project, amenities may include lifts, dedicated parking, security, power backup, landscaped areas, smart-home features and club facilities."
+            },
+            {
+                "question": "Are 3 BHK floors in Gurgaon available within gated societies?",
+                "answer": "Some projects offer 3 BHK options in gated or managed communities. Availability depends on the project and current inventory."
+            },
+            {
+                "question": "What are the common configurations available in luxury floors in Gurgaon?",
+                "answer": "Common configurations can include 2 BHK, 3 BHK and 4 BHK layouts. Exact options vary by project."
+            },
+            {
+                "question": "Are luxury floors in Gurgaon RERA registered?",
+                "answer": "RERA registration depends on the individual project and applicable requirements. Verify the project's registration details on the official Haryana RERA portal before booking."
+            }
+        ]
+    }
+}

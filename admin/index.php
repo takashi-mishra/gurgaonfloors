@@ -253,6 +253,14 @@ $error = (string) ($_GET['error'] ?? '');
                 <span class="nav-icon">▦</span>
                 Homepage Layout
             </a>
+            <a class="nav-item" href="faq.php">
+                <span class="nav-icon">▤</span>
+                <span>FAQ Management</span>
+            </a>
+            <a class="nav-item" href="footer.php">
+                <span class="nav-icon">▤</span>
+                <span>Footer Settings</span>
+            </a>
 
             <a class="nav-item" href="section-content.php"
              style="display:block;text-decoration:none">
