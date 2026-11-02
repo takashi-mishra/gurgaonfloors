@@ -168,14 +168,19 @@
 
 .property-contact-button {
     display: block;
+    width: 100%;
     text-align: center;
     padding: 16px;
+    border: 0;
     background: #d2bd65;
     color: #202435;
     text-decoration: none;
     font-weight: 800;
+    font: inherit;
+    font-weight: 800;
     border-radius: 35px;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .property-contact-button:hover {

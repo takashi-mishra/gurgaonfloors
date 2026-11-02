@@ -26,6 +26,10 @@ if (!is_array($data)) {
 }
 
 require_once dirname(__DIR__) . '/includes/homepage-layout.php';
+require_once dirname(__DIR__) . '/includes/lead-tracking.php';
+$leadTracking = leadTrackingInitialize();
+$leadCsrfToken = leadTrackingCsrfToken();
+$leadFormId = 'homepage_property_enquiry';
 
 
 // ========================================
@@ -138,7 +142,7 @@ $firstSlide = $slides[0] ?? [];
 
     <!-- Main stylesheet -->
     <link rel="stylesheet" href="client/css/style.css">
-    <link rel="stylesheet" href="client/css/project-sections.css">
+    <link rel="stylesheet" href="client/css/project-sections.css?v=<?= filemtime(dirname(__DIR__) . '/css/project-sections.css') ?>">
     <link rel="stylesheet" href="client/css/information-sections.css">
     <link rel="stylesheet" href="client/css/faq.css">
     <link rel="stylesheet" href="client/css/footer.css">
@@ -424,6 +428,8 @@ $firstSlide = $slides[0] ?? [];
             ?>
         <?php endforeach; ?>
 
+        <?php require __DIR__ . '/../Component/enquiry-modal.php'; ?>
+
        <?php
              require dirname(__DIR__) . '/Component/faq-section.php';
         ?>
@@ -435,7 +441,7 @@ $firstSlide = $slides[0] ?? [];
 
     <!-- Main JavaScript -->
     <script src="client/js/script.js" defer></script>
-    <script src="client/js/project-sections.js" defer></script>
+    <script src="client/js/project-sections.js?v=<?= filemtime(dirname(__DIR__) . '/js/project-sections.js') ?>" defer></script>
     <script src="client/js/faq.js" defer></script>
 
 </body>

@@ -1,5 +1,10 @@
 <?php
 
+require_once dirname(__DIR__) . '/includes/lead-tracking.php';
+$leadTracking = leadTrackingInitialize();
+$leadCsrfToken = leadTrackingCsrfToken();
+$leadFormId = 'property_detail_enquiry';
+
 $jsonPath = dirname(__DIR__, 2) . '/data/content.json';
 
 if (!is_file($jsonPath) || !is_readable($jsonPath)) {
@@ -102,6 +107,7 @@ $site = $data['site'] ?? [];
 
     <link rel="stylesheet" href="client/css/style.css">
     <link rel="stylesheet" href="client/css/property-detail.css">
+    <link rel="stylesheet" href="client/css/project-sections.css?v=<?= filemtime(dirname(__DIR__) . '/css/project-sections.css') ?>">
 </head>
 
 <body>
@@ -243,12 +249,14 @@ $site = $data['site'] ?? [];
 
             <p>Get floor plans, price list and free site visit.</p>
 
-            <a
+            <button
                 class="property-contact-button"
-                href="tel:<?= escapeHtml($site['phoneLink'] ?? '') ?>"
+                type="button"
+                data-enquiry
+                data-project="<?= escapeHtml($project['name'] ?? 'Property Enquiry') ?>"
             >
                 Contact Now
-            </a>
+            </button>
 
             <a
                 class="property-phone"
@@ -262,6 +270,9 @@ $site = $data['site'] ?? [];
     </div>
 
 </main>
+
+<?php require dirname(__DIR__) . '/Component/enquiry-modal.php'; ?>
+<script src="client/js/project-sections.js?v=<?= filemtime(dirname(__DIR__) . '/js/project-sections.js') ?>" defer></script>
 
 </body>
 </html>

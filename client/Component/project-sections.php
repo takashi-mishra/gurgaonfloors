@@ -145,7 +145,6 @@ if (!is_array($projectSections)) {
                     </article>
 
                 <?php endforeach; ?>
-
             </div>
 
         </div>
@@ -153,99 +152,3 @@ if (!is_array($projectSections)) {
     </section>
 
 <?php endforeach; ?>
-
-
-<?php if (empty($projectEnquiryModalRendered)): ?>
-    <?php $projectEnquiryModalRendered = true; ?>
-
-<!-- COMMON ENQUIRY POPUP -->
-<div
-    class="enquiry-modal"
-    id="projectEnquiryModal"
-    aria-hidden="true"
->
-
-    <div class="enquiry-modal-overlay" data-close-enquiry></div>
-
-    <div
-        class="enquiry-modal-content"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="enquiryTitle"
-    >
-
-        <button
-            type="button"
-            class="enquiry-close"
-            data-close-enquiry
-            aria-label="Close enquiry form"
-        >
-            &times;
-        </button>
-
-        <div class="enquiry-modal-header">
-
-            <h2 id="enquiryTitle">
-                👍 Yes, I'm Interested
-            </h2>
-
-            <p>
-                Fill out the form below and we'll get back to you
-            </p>
-
-        </div>
-        <?php endif; ?>
-
-
-        <form id="projectEnquiryForm">
-
-            <p class="enquiry-selected-property">
-                Property:
-                <strong id="selectedProjectName">Selected Property</strong>
-            </p>
-
-            <input
-                type="text"
-                name="name"
-                placeholder="👤 Name"
-                required
-            >
-
-            <input
-                type="tel"
-                name="phone"
-                placeholder="📞 Number"
-                pattern="[0-9+\-\s]{10,15}"
-                required
-            >
-
-            <input
-                type="email"
-                name="email"
-                placeholder="✉️ Email"
-                required
-            >
-
-            <label class="enquiry-privacy">
-                <input type="checkbox" required>
-                <span>
-                    I agree to Floors Gurgaon
-                    <a href="#">privacy policy</a>.
-                </span>
-            </label>
-
-            <button type="submit" class="enquiry-submit">
-                Contact Now
-            </button>
-
-            <p
-                class="enquiry-message"
-                id="enquiryMessage"
-                aria-live="polite"
-            ></p>
-
-        </form>
-
-    </div>
-
-</div>

@@ -20,6 +20,17 @@ if (!is_array($data)) {
     exit('Could not read a valid data/content.json file.');
 }
 
+require_once dirname(__DIR__) . '/client/includes/lead-storage.php';
+
+try {
+    $leadInboxData = leadStorageRead(dirname(__DIR__) . '/data/leads.json');
+    $leadInboxError = '';
+} catch (Throwable $exception) {
+    error_log('Dashboard could not read lead storage: ' . $exception->getMessage());
+    $leadInboxData = leadStorageDefaultData();
+    $leadInboxError = 'Lead data could not be loaded. Check data/leads.json permissions and JSON format.';
+}
+
 function adminEscape($value): string
 {
     return htmlspecialchars(
@@ -194,6 +205,80 @@ $error = (string) ($_GET['error'] ?? '');
             overflow-wrap: anywhere;
         }
 
+        .lead-dashboard-panel {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin: 20px 0 24px;
+            padding: 20px 22px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(24, 39, 65, .025);
+        }
+
+        .lead-dashboard-summary {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            min-width: 0;
+        }
+
+        .lead-dashboard-icon {
+            display: grid;
+            width: 48px;
+            height: 48px;
+            flex: 0 0 auto;
+            place-items: center;
+            border-radius: 10px;
+            background: #fff4e5;
+            color: #b7791f;
+            font-size: 22px;
+        }
+
+        .lead-dashboard-summary h3 {
+            margin: 0 0 3px;
+            color: var(--text);
+            font-size: 15px;
+        }
+
+        .lead-dashboard-summary p {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .lead-dashboard-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 0 0 auto;
+        }
+
+        .lead-dashboard-actions a {
+            display: inline-flex;
+            min-height: 40px;
+            align-items: center;
+            justify-content: center;
+            padding: 9px 14px;
+            border: 1px solid #e8ebf1;
+            border-radius: 8px;
+            color: #344057;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .lead-dashboard-actions a:first-child {
+            border-color: #17233b;
+            background: #17233b;
+            color: #fff;
+        }
+
+        .lead-dashboard-error {
+            margin-top: 5px;
+            color: #a12626 !important;
+        }
+
         @media (max-width: 650px) {
             .nav-editor-row {
                 grid-template-columns: 24px 1fr 36px;
@@ -206,6 +291,16 @@ $error = (string) ($_GET['error'] ?? '');
             .nav-editor-row button {
                 grid-column: 3;
                 grid-row: 1 / 3;
+            }
+
+            .lead-dashboard-panel {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .lead-dashboard-actions {
+                align-items: stretch;
+                flex-direction: column;
             }
         }
     </style>
@@ -245,6 +340,10 @@ $error = (string) ($_GET['error'] ?? '');
                 <span class="nav-count"><?= count($slides) ?></span>
             </button>
 
+            <a class="nav-item" href="leads.php">
+                <span class="nav-icon">✉</span>
+                Lead Inbox
+            </a>
             <a class="nav-item" href="projects.php">
                 <span class="nav-icon">▤</span>
                 Property Sections
@@ -339,6 +438,26 @@ $error = (string) ($_GET['error'] ?? '');
                     </div>
                     <div class="welcome-decoration">FG</div>
                 </div>
+
+                <section class="lead-dashboard-panel" aria-label="Lead inbox overview">
+                    <div class="lead-dashboard-summary">
+                        <span class="lead-dashboard-icon" aria-hidden="true">✉</span>
+                        <div>
+                            <h3>Lead Inbox</h3>
+                            <p>
+                                <?= (int) $leadInboxData['total_submissions'] ?> total submissions ·
+                                <?= count($leadInboxData['leads']) ?> stored leads
+                            </p>
+                            <?php if ($leadInboxError !== ''): ?>
+                                <p class="lead-dashboard-error" role="alert"><?= adminEscape($leadInboxError) ?></p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="lead-dashboard-actions">
+                        <a href="leads.php">View leads →</a>
+                        <a href="leads.php?export=csv">Download Excel CSV ↓</a>
+                    </div>
+                </section>
 
                 <div class="section-heading">
                     <div>
