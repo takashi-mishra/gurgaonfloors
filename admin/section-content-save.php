@@ -85,7 +85,7 @@ function cm_write_json(string $path, array $data): void {
 try {
     $builder = $data['builderSection'] ?? [];
     if (!is_array($builder)) $builder = [];
-    $builder['title'] = cm_post_string($_POST['builder_title'] ?? 'Explore Floors by Builder',180);
+    $builder['title'] = cm_post_string($_POST['builder_title'] ?? 'Explore Floors by',180);
     $builder['highlight'] = cm_post_string($_POST['builder_highlight'] ?? 'Builder',100);
     $builder['description'] = cm_post_string($_POST['builder_description'] ?? '',700);
     $builder['buttonText'] = cm_post_string($_POST['builder_button_text'] ?? 'All Builders',80);

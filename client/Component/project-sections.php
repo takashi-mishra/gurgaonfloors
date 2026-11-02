@@ -1,5 +1,5 @@
 <?php
-$projectSections = $data['projectSections'] ?? [];
+$projectSections = $projectSectionsToRender ?? ($data['projectSections'] ?? []);
 
 if (!is_array($projectSections)) {
     $projectSections = [];
@@ -155,8 +155,10 @@ if (!is_array($projectSections)) {
 <?php endforeach; ?>
 
 
-<!-- COMMON ENQUIRY POPUP -->
+<?php if (empty($projectEnquiryModalRendered)): ?>
+    <?php $projectEnquiryModalRendered = true; ?>
 
+<!-- COMMON ENQUIRY POPUP -->
 <div
     class="enquiry-modal"
     id="projectEnquiryModal"
@@ -192,6 +194,7 @@ if (!is_array($projectSections)) {
             </p>
 
         </div>
+        <?php endif; ?>
 
 
         <form id="projectEnquiryForm">

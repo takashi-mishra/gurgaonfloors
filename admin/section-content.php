@@ -110,7 +110,7 @@ $error = $_GET['error'] ?? '';
     <section class="cm-section" id="builder">
       <div class="cm-section-head"><div><h3>Explore Floors by Builder</h3><p>Section heading, description, button and builder cards.</p></div><button type="button" class="cm-btn add" data-add="builder">+ Add Builder</button></div>
       <div class="cm-fields">
-        <div class="cm-field"><label>Section title</label><input name="builder_title" value="<?=cm_e($builder['title'] ?? 'Explore Floors by Builder')?>"></div>
+        <div class="cm-field"><label>Section title</label><input name="builder_title" value="<?=cm_e($builder['title'] ?? 'Explore Floors by')?>"></div>
         <div class="cm-field"><label>Highlighted text</label><input name="builder_highlight" value="<?=cm_e($builder['highlight'] ?? 'Builder')?>"></div>
         <div class="cm-field full"><label>Description</label><textarea name="builder_description"><?=cm_e($builder['description'] ?? '')?></textarea></div>
         <div class="cm-field"><label>Button text</label><input name="builder_button_text" value="<?=cm_e($builder['buttonText'] ?? 'All Builders')?>"></div>

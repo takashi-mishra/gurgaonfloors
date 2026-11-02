@@ -25,6 +25,8 @@ if (!is_array($data)) {
     exit('Invalid JSON in data/content.json.');
 }
 
+require_once dirname(__DIR__) . '/includes/homepage-layout.php';
+
 
 // ========================================
 // 2. HELPER FUNCTIONS
@@ -79,32 +81,13 @@ if (!is_array($slides)) {
     $slides = [];
 }
 
-$homepageSectionKeys = ['projects', 'builders', 'locations', 'investment'];
 $homepageLayout = $data['homepageLayout'] ?? [];
-$homepageSectionOrder = $homepageLayout['order'] ?? $homepageSectionKeys;
-
-if (!is_array($homepageSectionOrder)) {
-    $homepageSectionOrder = $homepageSectionKeys;
+if (!is_array($homepageLayout)) {
+    $homepageLayout = [];
 }
 
-$homepageSectionOrder = array_values(array_unique(array_filter(
-    $homepageSectionOrder,
-    function ($key) use ($homepageSectionKeys) {
-        return is_string($key) && in_array($key, $homepageSectionKeys, true);
-    }
-)));
-
-foreach ($homepageSectionKeys as $sectionKey) {
-    if (!in_array($sectionKey, $homepageSectionOrder, true)) {
-        $homepageSectionOrder[] = $sectionKey;
-    }
-}
-
-$homepageSectionEnabled = $homepageLayout['enabled'] ?? [];
-
-if (!is_array($homepageSectionEnabled)) {
-    $homepageSectionEnabled = [];
-}
+$homepageSectionDefinitions = homepageLayoutDefinitions($data);
+$homepageSectionOrder = homepageLayoutOrder($homepageLayout, $homepageSectionDefinitions);
 
 // Keep only valid slide objects with an image path.
 $slides = array_values(array_filter($slides, function ($slide) {
@@ -421,15 +404,18 @@ $firstSlide = $slides[0] ?? [];
 
         <?php foreach ($homepageSectionOrder as $sectionKey): ?>
             <?php
-            if (
-                array_key_exists($sectionKey, $homepageSectionEnabled)
-                && empty($homepageSectionEnabled[$sectionKey])
-            ) {
+            if (!homepageLayoutIsEnabled($homepageLayout, $sectionKey)) {
                 continue;
             }
 
-            if ($sectionKey === 'projects') {
+            $sectionDefinition = $homepageSectionDefinitions[$sectionKey];
+
+            if ($sectionDefinition['type'] === 'project') {
+                $projectSectionsToRender = [
+                    $data['projectSections'][$sectionDefinition['index']],
+                ];
                 require __DIR__ . '/../Component/project-sections.php';
+                unset($projectSectionsToRender);
                 continue;
             }
 

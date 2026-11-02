@@ -4,17 +4,17 @@ if (empty($_SESSION['admin_logged_in'])) { header('Location: login.php'); exit; 
 $root = dirname(__DIR__); $jsonPath = $root . '/data/content.json';
 $data = is_file($jsonPath) ? json_decode((string)file_get_contents($jsonPath), true) : [];
 if (!is_array($data)) $data = [];
-$known = [
- 'projects' => ['title'=>'Property Projects', 'description'=>'Your existing project/property card sections'],
- 'builders' => ['title'=>'Explore Floors by Builder', 'description'=>'Builder directory cards'],
- 'locations' => ['title'=>'Prime Locations', 'description'=>'Location directory cards'],
- 'investment' => ['title'=>'Investment Benefits', 'description'=>'Investment statistics and benefit cards'],
-];
+$layoutHelper = $root . '/client/includes/homepage-layout.php';
+if (!is_file($layoutHelper) || !is_readable($layoutHelper)) {
+    http_response_code(500);
+    exit('Homepage layout configuration is unavailable.');
+}
+require_once $layoutHelper;
+
 $layout = $data['homepageLayout'] ?? [];
-$order = $layout['order'] ?? ['projects','builders','locations','investment'];
-$enabled = $layout['enabled'] ?? array_fill_keys(array_keys($known), true);
-$order = array_values(array_filter($order, fn($k)=>isset($known[$k])));
-foreach (array_keys($known) as $k) if (!in_array($k,$order,true)) $order[]=$k;
+if (!is_array($layout)) $layout = [];
+$known = homepageLayoutDefinitions($data);
+$order = homepageLayoutOrder($layout, $known);
 if (empty($_SESSION['csrf_token'])) $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 function se($v){return htmlspecialchars((string)$v,ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');}
 $saved = $_GET['saved'] ?? ''; $error = $_GET['error'] ?? '';
@@ -26,7 +26,7 @@ $saved = $_GET['saved'] ?? ''; $error = $_GET['error'] ?? '';
 <a class="back-link" href="index.php">← Back to Dashboard</a>
 <?php if($saved): ?><div class="notice"><?=se($saved)?></div><?php endif; ?>
 <?php if($error): ?><div class="notice error"><?=se($error)?></div><?php endif; ?>
-<div class="layout-hero"><h2>Homepage Layout Manager</h2><p>Drag sections or use the arrow buttons to change their order. Turn a section off to hide it from the homepage. The Projects option controls all your existing property sections as one block.</p></div>
+<div class="layout-hero"><h2>Homepage Layout Manager</h2><p>Drag sections or use the arrow buttons to set their exact homepage order. Each property group is a separate block, so you can place information sections between property groups. Turn a section off to hide it.</p></div>
 <form method="post" action="sections-save.php" id="layoutForm">
 <input type="hidden" name="csrf_token" value="<?=se($_SESSION['csrf_token'])?>">
 <input type="hidden" name="order" id="sectionOrder" value="<?=se(implode(',',$order))?>">
@@ -36,14 +36,14 @@ $saved = $_GET['saved'] ?? ''; $error = $_GET['error'] ?? '';
  <div class="layout-number">0<?= $i+1 ?></div>
  <div><div class="layout-name"><?=se($item['title'])?></div><div class="layout-desc"><?=se($item['description'])?></div></div>
  <div class="layout-actions">
-  <label class="switch"><input type="checkbox" name="enabled[<?=se($key)?>]" value="1" <?=!empty($enabled[$key])?'checked':''?>> Show</label>
+  <label class="switch"><input type="checkbox" name="enabled[]" value="<?=se($key)?>" <?=homepageLayoutIsEnabled($layout,$key)?'checked':''?>> Show</label>
   <button class="move-btn" type="button" data-move="up" aria-label="Move up">↑</button>
   <button class="move-btn" type="button" data-move="down" aria-label="Move down">↓</button>
  </div>
 </div>
 <?php endforeach; ?>
 </div>
-<div class="layout-footer"><span class="layout-hint">Changes are saved to data/content.json. Your existing project cards and their order remain unchanged.</span><button class="save-layout" type="submit">Save Homepage Layout →</button></div>
+<div class="layout-footer"><span class="layout-hint">Changes are saved to data/content.json. This controls the order of whole sections; property cards keep their order within each section.</span><button class="save-layout" type="submit">Save Homepage Layout →</button></div>
 </form></div>
 <script>
 (()=>{const list=document.getElementById('layoutList'),orderInput=document.getElementById('sectionOrder');let dragged=null;

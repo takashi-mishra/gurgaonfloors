@@ -73,12 +73,18 @@
                 {
                     "id": "adani-samsara",
                     "name": "Adani Samsara Ivana",
-                    "location": "Sector 63, Golf Course Extn. Road",
+                    "location": "Sector 88, Golf Course Extn. Road",
                     "price": "₹ 4.28 Cr* Onwards",
                     "rating": "4.9",
                     "badge": "New Launch",
-                    "image": "images/project-2.jpg",
-                    "enquiryEnabled": true
+                    "image": "images/property-ec8a2ff5e7c5df0852ae8e1a.jpg",
+                    "enquiryEnabled": true,
+                    "shortDescription": "ROF Pravasa is a low-rise residential project on most strategic location Sector 88A Gurgaon, well connected to Dwarka Expressway, Pataudi road & NH-8. This development comes under Deen Dayal Awas Yojana on 12 acres of land parcel.",
+                    "configuration": "",
+                    "size": "",
+                    "status": "",
+                    "developer": "",
+                    "externalUrl": "https://floorsgurgaon.com/rof-pravasa/"
                 },
                 {
                     "id": "rof-pravasa",
@@ -103,8 +109,14 @@
                     "price": "₹ 5.69 Cr* Onwards",
                     "rating": "4.8",
                     "badge": "New Launch",
-                    "image": "images/project-3.jpg",
-                    "enquiryEnabled": true
+                    "image": "images/property-76bdabfcaaf172b609c2b543.jpg",
+                    "enquiryEnabled": true,
+                    "shortDescription": "",
+                    "configuration": "",
+                    "size": "",
+                    "status": "",
+                    "developer": "",
+                    "externalUrl": ""
                 },
                 {
                     "id": "dlf-the-grove",
@@ -113,14 +125,98 @@
                     "price": "₹ 8.24 Cr* Onwards",
                     "rating": "5",
                     "badge": "Ultra Luxury",
-                    "image": "images/project-4.jpg",
-                    "enquiryEnabled": true
+                    "image": "images/property-b66d3c1df92dc5d09e5d1353.webp",
+                    "enquiryEnabled": true,
+                    "shortDescription": "",
+                    "configuration": "",
+                    "size": "",
+                    "status": "",
+                    "developer": "",
+                    "externalUrl": ""
+                }
+            ]
+        },
+        {
+            "id": "new-section",
+            "titleHighlight": "Luxury Floors",
+            "title": "Best Selling Builder Floors in Gurgaon",
+            "description": "Trusted by hundreds of buyers — these floors offer the finest combination of location, construction quality and long-term investment value across Gurgaon's prime sectors.",
+            "viewAllText": "View All",
+            "viewAllUrl": "",
+            "projects": [
+                {
+                    "id": "B12",
+                    "name": "Smart World Gems",
+                    "location": "Sector 89, Dwarka Expressway",
+                    "price": "₹ 1.58 Cr* Onwards",
+                    "rating": "4.5",
+                    "badge": "Luxury - Floors",
+                    "image": "images/property-b6e0038a31fd3da81b257517.jpg",
+                    "enquiryEnabled": true,
+                    "shortDescription": "",
+                    "configuration": "",
+                    "size": "",
+                    "status": "",
+                    "developer": "",
+                    "detailImage": "images/property-b6e0038a31fd3da81b257517.jpg",
+                    "externalUrl": ""
+                },
+                {
+                    "id": "B13",
+                    "name": "M3M Soulitude",
+                    "location": "Sector 89, Dwarka Expressway",
+                    "price": "₹ 1.44 Cr* Onwards",
+                    "rating": "4.5",
+                    "badge": "Luxury - Floors",
+                    "image": "images/property-cafd59c6afda65a03a586c7d.jpg",
+                    "enquiryEnabled": true,
+                    "shortDescription": "",
+                    "configuration": "",
+                    "size": "",
+                    "status": "",
+                    "developer": "",
+                    "detailImage": "images/property-cafd59c6afda65a03a586c7d.jpg",
+                    "externalUrl": ""
+                },
+                {
+                    "id": "B14",
+                    "name": "Vatika Xpressions",
+                    "location": "Sector 88B, Dwarka Expressway",
+                    "price": "₹ 1.63 Cr* Onwards",
+                    "rating": "4.5",
+                    "badge": "Ultra Luxury",
+                    "image": "images/property-eb70b6b43c234fc128251eff.jpg",
+                    "enquiryEnabled": true,
+                    "shortDescription": "",
+                    "configuration": "",
+                    "size": "",
+                    "status": "",
+                    "developer": "",
+                    "detailImage": "images/property-eb70b6b43c234fc128251eff.jpg",
+                    "externalUrl": ""
+                },
+                {
+                    "id": "B15",
+                    "name": "M2K Olive Green",
+                    "location": "Sector 104, Dwarka Expressway",
+                    "price": "₹ 1.65 Cr* Onwards",
+                    "rating": "4.5",
+                    "badge": "Ultra Luxury Floors",
+                    "image": "images/property-b08cc32772b3c22406b7c82e.jpg",
+                    "enquiryEnabled": true,
+                    "shortDescription": "",
+                    "configuration": "",
+                    "size": "",
+                    "status": "",
+                    "developer": "",
+                    "detailImage": "images/property-b08cc32772b3c22406b7c82e.jpg",
+                    "externalUrl": ""
                 }
             ]
         }
     ],
     "builderSection": {
-        "title": "Exploor floors by Builders",
+        "title": "Explore Floors by",
         "highlight": "Builder",
         "description": "Choose from Gurgaon's most trusted real estate developers — each with a proven track record of quality construction and timely delivery.",
         "buttonText": "All Builders",
@@ -321,8 +417,8 @@
     "homepageLayout": {
         "order": [
             "projects",
-            "investment",
             "builders",
+            "investment",
             "locations"
         ],
         "enabled": {
