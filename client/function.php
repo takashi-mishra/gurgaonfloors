@@ -21,3 +21,4 @@ if ($mysqli->connect_errno) {
 if (!$mysqli->set_charset('utf8mb4')) {
     throw new RuntimeException('Could not set the database connection charset.');
 }
+

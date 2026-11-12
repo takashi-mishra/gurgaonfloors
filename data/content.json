@@ -84,7 +84,117 @@
                     "size": "",
                     "status": "",
                     "developer": "",
-                    "externalUrl": "https://floorsgurgaon.com/rof-pravasa/"
+                    "externalUrl": "https://floorsgurgaon.com/rof-pravasa/",
+                    "detailPage": {
+                        "heroEyebrow": "New Launch",
+                        "heroTitle": "Adani Samsara Ivana",
+                        "heroDescription": "ROF Pravasa is a low-rise residential project on most strategic location Sector 88A Gurgaon, well connected to Dwarka Expressway, Pataudi road & NH-8. This development comes under Deen Dayal Awas Yojana on 12 acres of land parcel.",
+                        "heroButton": "Enquire Now",
+                        "resourcesTitle": "ya check kar",
+                        "resourcesDescription": "oye my god",
+                        "aboutTitle": "About the Project",
+                        "aboutDescription": "ROF Pravasa is a low-rise residential project on most strategic location Sector 88A Gurgaon, well connected to Dwarka Expressway, Pataudi road & NH-8. This development comes under Deen Dayal Awas Yojana on 12 acres of land parcel.",
+                        "aboutButton": "Download Brochure",
+                        "highlightsTitle": "hello ider",
+                        "highlightsDescription": "bla bla bla",
+                        "galleryTitle": "title",
+                        "galleryDescription": "gallery description",
+                        "reachoutTitle": "hee hee hee",
+                        "reachoutDescription": "reach out",
+                        "reachoutButton": "browser now",
+                        "resourceCards": [
+                            {
+                                "title": "Project Brochure",
+                                "description": "Get a closer look at the project, its features and key details.",
+                                "buttonText": "Download Brochure"
+                            },
+                            {
+                                "title": "Floor Plans",
+                                "description": "Explore the available layouts and find the right fit for you.",
+                                "buttonText": "View Floor Plans"
+                            },
+                            {
+                                "title": "Price & Payment Plan",
+                                "description": "Request the latest price list and payment plan information.",
+                                "buttonText": "View Price List"
+                            },
+                            {
+                                "title": "Schedule a Visit",
+                                "description": "Speak with our team to arrange a call or plan a site visit.",
+                                "buttonText": "Schedule a Call"
+                            }
+                        ],
+                        "highlights": [
+                            {
+                                "icon": "⌖",
+                                "title": "Location",
+                                "description": "Sector 88, Golf Course Extn. Road"
+                            },
+                            {
+                                "icon": "₹",
+                                "title": "Starting price",
+                                "description": "₹ 4.28 Cr* Onwards"
+                            },
+                            {
+                                "icon": "⌂",
+                                "title": "Configuration",
+                                "description": "hello kesa ho ji aap"
+                            },
+                            {
+                                "icon": "↔",
+                                "title": "Available sizes",
+                                "description": "abe yrr"
+                            },
+                            {
+                                "icon": "◷",
+                                "title": "Project status",
+                                "description": "ya kya baat hui be"
+                            },
+                            {
+                                "icon": "✦",
+                                "title": "Developer",
+                                "description": "kyu aakhir kyu"
+                            },
+                            {
+                                "icon": "▤",
+                                "title": "Project brochure",
+                                "description": "Request detailed project information."
+                            },
+                            {
+                                "icon": "▦",
+                                "title": "Floor plans",
+                                "description": "Ask for the latest available floor plans."
+                            },
+                            {
+                                "icon": "◉",
+                                "title": "Site visit",
+                                "description": "Arrange a guided visit with our team."
+                            }
+                        ],
+                        "visibility": {
+                            "hero": true,
+                            "resources": true,
+                            "about": true,
+                            "highlights": true,
+                            "gallery": true,
+                            "reachout": true
+                        },
+                        "sectionOrder": [
+                            "resources",
+                            "about",
+                            "highlights",
+                            "gallery",
+                            "reachout"
+                        ],
+                        "gallery": [
+                            "images/property-aceed5d8c16751fa75be96f3.webp",
+                            "images/property-097b3845bfab8bbf1c10ae49.jpg",
+                            "images/property-e9e9779e8984e6490f93f43b.jpg",
+                            "images/property-e9099881c352d229dbb559e5.jpg",
+                            "images/property-11b4c1b5dfd48468f50b8289.jpg"
+                        ],
+                        "heroImage": "images/property-58096642ee83c831c65cb578.webp"
+                    }
                 },
                 {
                     "id": "rof-pravasa",
@@ -100,7 +210,116 @@
                     "size": "2100+ sq.ft.",
                     "status": "Under Construction",
                     "developer": "",
-                    "externalUrl": "https://github.com/takashi-mishra"
+                    "externalUrl": "https://github.com/takashi-mishra",
+                    "detailPage": {
+                        "heroEyebrow": "New Launch",
+                        "heroTitle": "ROF Pravasa",
+                        "heroDescription": "hale dill mera",
+                        "heroButton": "Enquire Now",
+                        "resourcesTitle": "Everything you need to decide",
+                        "resourcesDescription": "Request the latest project information directly from our property team.",
+                        "aboutTitle": "About the Project",
+                        "aboutDescription": "hale dill mera",
+                        "aboutButton": "Download Brochure",
+                        "highlightsTitle": "Project Highlights",
+                        "highlightsDescription": "Key details and helpful information about this project.",
+                        "galleryTitle": "A closer look",
+                        "galleryDescription": "Explore a selection of premium residences from our collection.",
+                        "reachoutTitle": "Let’s find your place",
+                        "reachoutDescription": "Share your details and our property team will help you with the next steps.",
+                        "reachoutButton": "Send Enquiry",
+                        "resourceCards": [
+                            {
+                                "title": "Project Brochure",
+                                "description": "Get a closer look at the project, its features and key details.",
+                                "buttonText": "Download Brochure"
+                            },
+                            {
+                                "title": "Floor Plans",
+                                "description": "Explore the available layouts and find the right fit for you.",
+                                "buttonText": "View Floor Plans"
+                            },
+                            {
+                                "title": "Price & Payment Plan",
+                                "description": "Request the latest price list and payment plan information.",
+                                "buttonText": "View Price List"
+                            },
+                            {
+                                "title": "Schedule a Visit",
+                                "description": "Speak with our team to arrange a call or plan a site visit.",
+                                "buttonText": "Schedule a Call"
+                            }
+                        ],
+                        "highlights": [
+                            {
+                                "icon": "⌖",
+                                "title": "Location",
+                                "description": "Sector 88A, Gurgaon"
+                            },
+                            {
+                                "icon": "₹",
+                                "title": "Starting price",
+                                "description": "₹ 2.40 Cr* Onwards"
+                            },
+                            {
+                                "icon": "⌂",
+                                "title": "Configuration",
+                                "description": "2,3 bhk"
+                            },
+                            {
+                                "icon": "↔",
+                                "title": "Available sizes",
+                                "description": "2100+ sq.ft."
+                            },
+                            {
+                                "icon": "◷",
+                                "title": "Project status",
+                                "description": "Under Construction"
+                            },
+                            {
+                                "icon": "✦",
+                                "title": "Developer",
+                                "description": "Speak with our property team."
+                            },
+                            {
+                                "icon": "▤",
+                                "title": "Project brochure",
+                                "description": "Request detailed project information."
+                            },
+                            {
+                                "icon": "▦",
+                                "title": "Floor plans",
+                                "description": "Ask for the latest available floor plans."
+                            },
+                            {
+                                "icon": "◉",
+                                "title": "Site visit",
+                                "description": "Arrange a guided visit with our team."
+                            }
+                        ],
+                        "visibility": {
+                            "hero": true,
+                            "resources": true,
+                            "about": true,
+                            "highlights": true,
+                            "gallery": true,
+                            "reachout": true
+                        },
+                        "sectionOrder": [
+                            "resources",
+                            "about",
+                            "highlights",
+                            "gallery",
+                            "reachout"
+                        ],
+                        "gallery": [
+                            "images/property-3cf67e8c33d807fec6303cd1.png",
+                            "images/property-81389b7bf5b11c283c648add.png",
+                            "images/property-401385fcac7674f82af58a4f.png",
+                            "images/property-ed77f9fd015c5c3d0172bc0d.png",
+                            "images/property-f592b54743941cb7bba6c15d.png"
+                        ]
+                    }
                 },
                 {
                     "id": "birla-navya",

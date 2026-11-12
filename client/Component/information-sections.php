@@ -15,7 +15,7 @@ if (!function_exists('infoSectionEscape')) {
 }
 ?>
 
-<!-- ================= BUILDER SECTION ================= -->
+<!-- ============================================== BUILDER SECTION =========================================== -->
 
 <?php if (
     (!isset($informationSectionKey) || $informationSectionKey === 'builders')
@@ -60,7 +60,7 @@ if (!function_exists('infoSectionEscape')) {
 <?php endif; ?>
 
 
-<!-- ================= LOCATION SECTION ================= -->
+<!-- ============================================== LOCATION SECTION ================================================ -->
 
 <?php if (
     (!isset($informationSectionKey) || $informationSectionKey === 'locations')
