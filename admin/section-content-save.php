@@ -69,6 +69,53 @@ function cm_save_rows(array $rows, string $kind): array {
     }
     return array_values($out);
 }
+function cm_save_card_sections(array $sections): array {
+    if (count($sections) > 50) throw new RuntimeException('Maximum 50 custom card sections are allowed.');
+    $out = [];
+    $ids = [];
+    foreach ($sections as $section) {
+        if (!is_array($section)) throw new RuntimeException('Invalid custom section data received.');
+        $id = cm_post_string($section['id'] ?? '', 60);
+        if ($id === '') $id = 'custom-' . bin2hex(random_bytes(6));
+        if (!preg_match('/^[a-z0-9][a-z0-9-]{0,59}$/D', $id) || isset($ids[$id])) {
+            throw new RuntimeException('Custom section IDs must be unique and use only lowercase letters, numbers and hyphens.');
+        }
+        $ids[$id] = true;
+        $title = cm_post_string($section['title'] ?? '', 180);
+        if ($title === '') throw new RuntimeException('Every custom card section needs a title.');
+        $buttonUrl = cm_post_string($section['buttonUrl'] ?? '#contact', 500);
+        if (!cm_safe_url($buttonUrl)) throw new RuntimeException('Invalid custom section button URL.');
+        $items = $section['items'] ?? [];
+        if (!is_array($items) || count($items) < 1 || count($items) > 100) {
+            throw new RuntimeException('Every custom section must contain between 1 and 100 cards.');
+        }
+        $cards = [];
+        foreach ($items as $item) {
+            if (!is_array($item)) throw new RuntimeException('Invalid custom card data received.');
+            $cardTitle = cm_post_string($item['title'] ?? '', 140);
+            if ($cardTitle === '') throw new RuntimeException('Every custom card needs a title.');
+            $url = cm_post_string($item['url'] ?? '', 500);
+            if (!cm_safe_url($url)) throw new RuntimeException('Invalid custom card URL.');
+            $cards[] = [
+                'title' => $cardTitle,
+                'description' => cm_post_string($item['description'] ?? '', 700),
+                'icon' => cm_post_string($item['icon'] ?? '', 40),
+                'url' => $url,
+                'featured' => isset($item['featured']) && (string)$item['featured'] === '1',
+                'enabled' => isset($item['enabled']) && (string)$item['enabled'] === '1',
+            ];
+        }
+        $out[] = [
+            'id' => $id,
+            'title' => $title,
+            'description' => cm_post_string($section['description'] ?? '', 700),
+            'buttonText' => cm_post_string($section['buttonText'] ?? '', 100),
+            'buttonUrl' => $buttonUrl,
+            'items' => array_values($cards),
+        ];
+    }
+    return array_values($out);
+}
 function cm_write_json(string $path, array $data): void {
     $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     if ($json === false) throw new RuntimeException('Could not encode JSON.');
@@ -114,6 +161,8 @@ try {
     $investment['stats'] = cm_save_rows(cm_array_field('stats'),'stats');
     $investment['benefits'] = cm_save_rows(cm_array_field('benefits'),'benefits');
     $data['investmentSection'] = $investment;
+
+    $data['cardSections'] = cm_save_card_sections(cm_array_field('card_sections'));
 
     cm_write_json($jsonPath, $data);
     header('Location: section-content.php?saved=' . rawurlencode('Section content saved successfully.'));

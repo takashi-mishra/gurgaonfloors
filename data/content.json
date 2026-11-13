@@ -34,7 +34,7 @@
         }
     ],
     "hero": {
-        "eyebrow": "REMIUM LIVING IN GURGAON",
+        "eyebrow": "PREMIUM LIVING IN GURGAON",
         "heading": "Premium Builder Floors with Top Amenities",
         "description": "Explore premium builder floors in Gurgaon’s finest locations.",
         "primaryButton": "Explore Properties",
@@ -219,7 +219,7 @@
                         "resourcesTitle": "Everything you need to decide",
                         "resourcesDescription": "Request the latest project information directly from our property team.",
                         "aboutTitle": "About the Project",
-                        "aboutDescription": "hale dill mera",
+                        "aboutDescription": "ROF Pravasa is a low-rise residential project on most strategic location Sector 88A Gurgaon, well connected to Dwarka Expressway, Pataudi road & NH-8. This development comes under Deen Dayal Awas Yojana on 12 acres of land parcel. Surrounded on both sides by spacious 60 m wide roads, ensuring smooth connectivity. It offes premium low rise 3bhk independent floor, additional Office Space are available for 1st 2nd & 3rd Floors & dedicated terrace for 4th Floor. Dedicated Car parking available on stilt. These luxury floors are designed for those homebuyers who are not just looking for a house, but want to enjoy a lifestyle that balance comfort, health, and smart living. This project also include modular kitchen & air conditioning in every Room. There are dedicated spaces for kids, youth, and senior citizens. The project also offers 3.5 acres of green area, a 75,000 sq. ft. clubhouse, and modern amenities, which include: Fitness Centre, Yoga Centre, Meditation Zone, Outdoor Gym, Reflexology Path, Badminton Court, Basketball Court, Kids Pool, Amphitheatre,",
                         "aboutButton": "Download Brochure",
                         "highlightsTitle": "Project Highlights",
                         "highlightsDescription": "Key details and helpful information about this project.",
@@ -357,11 +357,11 @@
         },
         {
             "id": "new-section",
-            "titleHighlight": "Luxury Floors",
+            "titleHighlight": "",
             "title": "Best Selling Builder Floors in Gurgaon",
             "description": "Trusted by hundreds of buyers — these floors offer the finest combination of location, construction quality and long-term investment value across Gurgaon's prime sectors.",
             "viewAllText": "View All",
-            "viewAllUrl": "",
+            "viewAllUrl": "https://www.google.com",
             "projects": [
                 {
                     "id": "B12",
@@ -429,6 +429,194 @@
                     "status": "",
                     "developer": "",
                     "detailImage": "images/property-b08cc32772b3c22406b7c82e.jpg",
+                    "externalUrl": ""
+                }
+            ]
+        },
+        {
+            "id": "S3",
+            "titleHighlight": "Luxury",
+            "title": "Builder Floors Gurgaon",
+            "description": "Choose from 3, 4 & 5 BHK luxury floors designed with premium finishes, smart home features and world-class community amenities across Gurgaon's most prestigious neighbourhoods.",
+            "viewAllText": "View All",
+            "viewAllUrl": "",
+            "projects": [
+                {
+                    "id": "C1",
+                    "name": "Spiti Homes",
+                    "location": "Sector 99A, Dwarka Expressway",
+                    "price": "₹1.95 Cr* Onwards",
+                    "rating": "4.8",
+                    "badge": "Ultra Luxury Floors",
+                    "image": "images/property-cfebba290b185f56bf4263ce.jpg",
+                    "enquiryEnabled": true,
+                    "shortDescription": "Ideally located in sector 99A, Gurugram, Spiti Homes offers seamless connectivity with roadways, rail routes, hospitals, educational institutions, hotels and restaurants, shopping malls and markets.",
+                    "configuration": "3 BHK",
+                    "size": "12.14 Acres",
+                    "status": "New Launch",
+                    "developer": "Spiti Township LLP",
+                    "detailImage": "images/property-c43135bd7b7ebcfb3dc93fdf.png",
+                    "externalUrl": "",
+                    "detailPage": {
+                        "heroEyebrow": "Ultra Luxury Floors",
+                        "heroTitle": "Spiti Homes",
+                        "heroDescription": "SPITI HOMES is spread over 12.14 Acres under DDJAY, offering 217 independent plots with central greenery and serenity and one convenient shopping center.",
+                        "heroButton": "Enquire Now",
+                        "resourcesTitle": "Everything you need to decide",
+                        "resourcesDescription": "Explore essential project details, including location advantages, property specifications, amenities, pricing, floor plans, and key highlights. Find all the information you need to make a well-informed decision about your future investment.",
+                        "aboutTitle": "About the Project",
+                        "aboutDescription": "Introducing Spiti Homes, a meticulously planned plotted development nestled in Sector 99A, Gurugram, Haryana 122001. Spanning over approximately 12.14 acres, this project offers a unique opportunity for those seeking to build their dream home in a thriving urban locale. Situated under the Deen Dayal Jan Awas Yojana (DDJAY), Spiti Homes promises a blend of modern living and serene surroundings, catering to the diverse needs of homeowners and investors alike. With its prime location and thoughtful design, Spiti Homes presents an ideal canvas for crafting your ideal living space in the heart of Gurugram.",
+                        "aboutButton": "Download Brochure",
+                        "highlightsTitle": "Project Highlights",
+                        "highlightsDescription": "Key details and helpful information about this project.",
+                        "galleryTitle": "A closer look",
+                        "galleryDescription": "Get in touch with our property team to receive the latest project updates, detailed property information, pricing details, floor plans, availability, and exclusive offers. Our team will be happy to assist you with any queries and guide you through every step of your property-buying journey.",
+                        "reachoutTitle": "Let’s find your place",
+                        "reachoutDescription": "Fill out the enquiry form with your contact details, and our dedicated property team will get in touch with you shortly to understand your requirements, answer your questions, share the latest project information, and guide you through the next steps, including pricing, availability, and scheduling a site visit.",
+                        "reachoutButton": "Send Enquiry",
+                        "resourceCards": [
+                            {
+                                "title": "Project Brochure",
+                                "description": "Explore essential project details, including location advantages, property specifications, amenities, pricing, floor plans, and key highlights.",
+                                "buttonText": "Download Brochure"
+                            },
+                            {
+                                "title": "Layout Plan",
+                                "description": "Explore the available layouts and find the right fit for you.",
+                                "buttonText": "View Layout Plan"
+                            },
+                            {
+                                "title": "Price & Payment Plan",
+                                "description": "Request the latest price list and payment plan information.",
+                                "buttonText": "View Price List"
+                            },
+                            {
+                                "title": "Schedule a Visit",
+                                "description": "Speak with our team to arrange a call or plan a site visit.",
+                                "buttonText": "Schedule a Call"
+                            }
+                        ],
+                        "highlights": [
+                            {
+                                "icon": "⌖",
+                                "title": "Location",
+                                "description": "Sector 99A, Dwarka Expressway"
+                            },
+                            {
+                                "icon": "₹",
+                                "title": "Starting price",
+                                "description": "₹1.95 Cr* Onwards"
+                            },
+                            {
+                                "icon": "⌂",
+                                "title": "Configuration",
+                                "description": "3 BHK"
+                            },
+                            {
+                                "icon": "↔",
+                                "title": "Available sizes",
+                                "description": "12.14 Acres"
+                            },
+                            {
+                                "icon": "◷",
+                                "title": "Project status",
+                                "description": "New Launch"
+                            },
+                            {
+                                "icon": "✦",
+                                "title": "Developer",
+                                "description": "Spiti Township LLP"
+                            },
+                            {
+                                "icon": "▤",
+                                "title": "Project brochure",
+                                "description": "Request detailed project information."
+                            },
+                            {
+                                "icon": "▦",
+                                "title": "Floor plans",
+                                "description": "Ask for the latest available floor plans."
+                            },
+                            {
+                                "icon": "◉",
+                                "title": "Site visit",
+                                "description": "Arrange a guided visit with our team."
+                            }
+                        ],
+                        "visibility": {
+                            "hero": true,
+                            "resources": true,
+                            "about": true,
+                            "highlights": true,
+                            "gallery": true,
+                            "reachout": true
+                        },
+                        "sectionOrder": [
+                            "resources",
+                            "about",
+                            "highlights",
+                            "gallery",
+                            "reachout"
+                        ],
+                        "gallery": [
+                            "images/property-2877db10c00dd753fe6dba0c.jpg",
+                            "images/property-0e0e7b6328b70b5910efb8bf.jpg",
+                            "images/property-8f1a91e9c6de67809de4e31f.jpg",
+                            "images/property-5522b510b4de41b0ad47ac97.jpg",
+                            "images/property-244f851a44fe3d8c4e30fd6d.png",
+                            "images/property-839878365dba7675856162bd.jpg"
+                        ]
+                    }
+                },
+                {
+                    "id": "C2",
+                    "name": "Ganga Kashi Residences",
+                    "location": "Sector 89, Gurgaon",
+                    "price": "₹ 2.0 Cr* Onwards",
+                    "rating": "4.5",
+                    "badge": "Ultra Luxury Floors",
+                    "image": "images/property-93ef78a7749a6381f0415ac5.jpg",
+                    "enquiryEnabled": true,
+                    "shortDescription": "If high-rises aren't for you, Kashi Residences gives you a 3 BHK floor in a gated, low-rise community of about 250 homes, with a private lift, stilt parking and a proper clubhouse.",
+                    "configuration": "3 BHK",
+                    "size": "179 sq.yd",
+                    "status": "New Launch",
+                    "developer": "Ganga Realty",
+                    "detailImage": "images/property-93ef78a7749a6381f0415ac5.jpg",
+                    "externalUrl": ""
+                },
+                {
+                    "id": "c4",
+                    "name": "ZAK Ivory Arches",
+                    "location": "Sector 88A, Dwarka Expressway",
+                    "price": "₹ 2.30 Cr* Onwards",
+                    "rating": "4.5",
+                    "badge": "Ultra Luxury Floors",
+                    "image": "images/property-0e1d4a695f09155fe4843e1d.webp",
+                    "enquiryEnabled": true,
+                    "shortDescription": "Zak Ivory Arches is an exclusive residential offering in Zakspaces And Interiors Pvt Ltd's acclaimed super-luxury Kothi portfolio in Sector 88B, Gurgaon. The Zak Ivory Arches serves high-end homebuyers who look forward to soaking in spacious living spaces, privacy, and amenities of global standards.",
+                    "configuration": "3 & 4 BHK",
+                    "size": "1,620 - 2,421 Sq.Ft.",
+                    "status": "New Launch",
+                    "developer": "",
+                    "detailImage": "images/property-0e1d4a695f09155fe4843e1d.webp",
+                    "externalUrl": "https://www.rathiglobalrealty.com/zak-ivory-arches-sector-88b-gurgaon-npd"
+                },
+                {
+                    "id": "c5",
+                    "name": "MRG Crown Floors",
+                    "location": "Sector 106, Dwarka Expressway",
+                    "price": "₹ 2.43 Cr* Onwards",
+                    "rating": "4.8",
+                    "badge": "Super Luxury Residences",
+                    "image": "images/property-ef6845b0851728529c65d04c.webp",
+                    "enquiryEnabled": true,
+                    "shortDescription": "MRG Crown presents a home that benefits your status and a lifestyle that surpasses all benchmarks of luxury. Built with high meticulousness and adorned with inimitable features galore, Sector 106 coming soon is definitely for the chosen few. The project gives you a beautiful start living at an affordable price.",
+                    "configuration": "3 & 4 BHK",
+                    "size": "1359 - 1593 sq.ft.",
+                    "status": "",
+                    "developer": "",
+                    "detailImage": "images/property-ef6845b0851728529c65d04c.webp",
                     "externalUrl": ""
                 }
             ]
@@ -635,13 +823,17 @@
     },
     "homepageLayout": {
         "order": [
-            "projects",
+            "project:new-launch",
+            "project:new-section",
             "builders",
+            "project:S3",
             "investment",
             "locations"
         ],
         "enabled": {
-            "projects": true,
+            "project:new-launch": true,
+            "project:new-section": true,
+            "project:S3": true,
             "builders": true,
             "locations": true,
             "investment": true

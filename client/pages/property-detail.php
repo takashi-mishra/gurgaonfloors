@@ -211,6 +211,10 @@ if (!empty($visibility['about'])) {
     ?>
     <section class="detail-section detail-about" id="about-project">
         <div class="detail-shell about-layout">
+            <header class="about-heading">
+                <span class="detail-kicker">THE RESIDENCE</span>
+                <h2><?= escapeHtml($detail['aboutTitle']) ?></h2>
+            </header>
             <div class="about-image-wrap">
                 <?php if ($aboutImage !== ''): ?>
                     <img src="<?= escapeHtml($aboutImage) ?>" alt="<?= escapeHtml(($project['name'] ?? 'Project') . ' exterior') ?>" loading="lazy">
@@ -218,8 +222,6 @@ if (!empty($visibility['about'])) {
                 <?php if (!empty($project['badge'])): ?><span class="about-image-tag"><?= escapeHtml($project['badge']) ?></span><?php endif; ?>
             </div>
             <div class="about-copy">
-                <span class="detail-kicker">THE RESIDENCE</span>
-                <h2><?= escapeHtml($detail['aboutTitle']) ?></h2>
                 <p><?= nl2br(escapeHtml($detail['aboutDescription'])) ?></p>
                 <?php if ($stats): ?>
                     <dl class="project-facts">
@@ -274,7 +276,7 @@ if (!empty($visibility['gallery']) && $gallery) {
             </div>
         </div>
         <div class="gallery-marquee" aria-label="Project image gallery">
-            <div class="gallery-track">
+            <div class="gallery-track" style="--gallery-duration: <?= max(40, count($gallery) * 8) ?>s">
                 <?php foreach ([false, true] as $isDuplicate): ?>
                     <div class="gallery-group" <?= $isDuplicate ? 'aria-hidden="true"' : '' ?>>
                         <?php foreach ($gallery as $index => $galleryImage): ?>

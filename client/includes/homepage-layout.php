@@ -65,6 +65,28 @@ function homepageLayoutDefinitions(array $data): array
         'description' => 'Investment statistics and benefit cards',
     ];
 
+    $cardSections = $data['cardSections'] ?? [];
+    if (is_array($cardSections)) {
+        foreach ($cardSections as $index => $section) {
+            if (!is_array($section) || !is_string($section['id'] ?? null) || $section['id'] === '') {
+                continue;
+            }
+
+            $key = 'card-section:' . rawurlencode($section['id']);
+            if (isset($definitions[$key])) {
+                continue;
+            }
+
+            $title = trim((string) ($section['title'] ?? ''));
+            $definitions[$key] = [
+                'type' => 'cards',
+                'index' => $index,
+                'title' => $title !== '' ? $title : 'Custom Card Section',
+                'description' => 'Custom homepage card section',
+            ];
+        }
+    }
+
     return $definitions;
 }
 

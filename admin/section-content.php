@@ -19,6 +19,7 @@ function cm_rows($data, $key): array {
 $builder = $data['builderSection'] ?? [];
 $locations = $data['locationSection'] ?? [];
 $investment = $data['investmentSection'] ?? [];
+$cardSections = cm_rows($data, 'cardSections');
 $sections = [
     'builder' => [
         'title' => 'Explore Floors by Builder',
@@ -79,6 +80,9 @@ $error = $_GET['error'] ?? '';
 .cm-save:hover{background:#a93628}.cm-notice{padding:12px 15px;border-radius:9px;margin-bottom:14px;background:#edf9f0;color:#176b35}.cm-notice.error{background:#fff0ef;color:#a12e25}
 .cm-nav{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}.cm-nav a{padding:9px 13px;border-radius:8px;background:#fff;border:1px solid #e5e7ed;color:#39445a;text-decoration:none;font-size:13px;font-weight:700}
 .cm-help{font-size:12px;color:#7b8495;margin-top:4px}
+.cm-section-record{border:1px solid #e3e6ed;border-radius:13px;padding:16px;background:#fbfcfe;margin-bottom:14px}
+.cm-section-record>.cm-card-top{margin-bottom:13px}
+.cm-custom-card-list{display:grid;gap:12px}
 @media(max-width:700px){.cm-fields{grid-template-columns:1fr}.cm-field.full{grid-column:auto}.cm-top,.cm-section-head{align-items:flex-start;flex-direction:column}.cm-savebar{align-items:stretch;flex-direction:column}.cm-save{width:100%}}
 </style>
 </head>
@@ -94,12 +98,13 @@ $error = $_GET['error'] ?? '';
 
   <div class="cm-intro">
     <h2>Section Content Manager</h2>
-    <p>Edit the Builder, Location and Investment content shown on the homepage. Add, remove, enable, disable and reorder cards. Changes are saved in <code>data/content.json</code>.</p>
+    <p>Edit the Builder, Location and Investment content, or create complete card sections for the homepage. Add, remove, enable, disable and reorder cards. Changes are saved in <code>data/content.json</code>.</p>
   </div>
 
   <nav class="cm-nav">
     <a href="#builder">Builder Cards</a>
     <a href="#locations">Location Cards</a>
+    <a href="#card-sections">Custom Card Sections</a>
     <a href="#stats">Investment Stats</a>
     <a href="#benefits">Investment Benefits</a>
   </nav>
@@ -154,6 +159,38 @@ $error = $_GET['error'] ?? '';
       </div>
     </section>
 
+    <section class="cm-section" id="card-sections">
+      <div class="cm-section-head"><div><h3>Custom Card Sections</h3><p>Create a homepage section with its own heading, description, button and cards. Reorder whole sections in Homepage Layout.</p></div><button type="button" class="cm-btn add" data-add-section>+ Add Card Section</button></div>
+      <div class="cm-list" data-list="card_sections">
+        <?php foreach ($cardSections as $i=>$section): if (!is_array($section)) continue; ?>
+        <div class="cm-section-record" data-section-record>
+          <input type="hidden" name="card_sections[<?=$i?>][id]" value="<?=cm_e($section['id'] ?? '')?>" data-section-field="id">
+          <div class="cm-card-top"><span class="cm-card-title">Card section <?=($i+1)?></span><div class="cm-card-actions"><button type="button" class="cm-btn danger" data-section-remove>Delete Section</button></div></div>
+          <div class="cm-fields">
+            <div class="cm-field"><label>Section title</label><input name="card_sections[<?=$i?>][title]" value="<?=cm_e($section['title'] ?? '')?>" data-section-field="title" required></div>
+            <div class="cm-field"><label>Button text (optional)</label><input name="card_sections[<?=$i?>][buttonText]" value="<?=cm_e($section['buttonText'] ?? '')?>" data-section-field="buttonText"></div>
+            <div class="cm-field full"><label>Description</label><textarea name="card_sections[<?=$i?>][description]" data-section-field="description"><?=cm_e($section['description'] ?? '')?></textarea></div>
+            <div class="cm-field full"><label>Button URL</label><input name="card_sections[<?=$i?>][buttonUrl]" value="<?=cm_e($section['buttonUrl'] ?? '#contact')?>" data-section-field="buttonUrl"></div>
+          </div>
+          <div class="cm-section-head"><div><strong>Cards</strong><p>Each card can have an icon, title, description and optional link.</p></div><button type="button" class="cm-btn add" data-add-custom-card>+ Add Card</button></div>
+          <div class="cm-custom-card-list" data-section-cards>
+            <?php foreach (($section['items'] ?? []) as $j=>$row): if (!is_array($row)) continue; ?>
+            <div class="cm-card" data-custom-item>
+              <div class="cm-card-top"><span class="cm-card-title">Card <?=($j+1)?></span><div class="cm-card-actions"><label class="cm-enabled"><input type="checkbox" name="card_sections[<?=$i?>][items][<?=$j?>][enabled]" value="1" <?=(!array_key_exists('enabled',$row)||!empty($row['enabled']))?'checked':''?> data-card-field="enabled"> Show</label><label class="cm-enabled"><input type="checkbox" name="card_sections[<?=$i?>][items][<?=$j?>][featured]" value="1" <?=!empty($row['featured'])?'checked':''?> data-card-field="featured"> Highlight</label><button type="button" class="cm-btn" data-custom-up>↑</button><button type="button" class="cm-btn" data-custom-down>↓</button><button type="button" class="cm-btn danger" data-custom-remove>Delete</button></div></div>
+              <div class="cm-fields">
+                <div class="cm-field"><label>Card title</label><input name="card_sections[<?=$i?>][items][<?=$j?>][title]" value="<?=cm_e($row['title'] ?? '')?>" data-card-field="title" required></div>
+                <div class="cm-field"><label>Icon (emoji or symbol)</label><input name="card_sections[<?=$i?>][items][<?=$j?>][icon]" value="<?=cm_e($row['icon'] ?? '')?>" data-card-field="icon"></div>
+                <div class="cm-field full"><label>Description</label><textarea name="card_sections[<?=$i?>][items][<?=$j?>][description]" data-card-field="description"><?=cm_e($row['description'] ?? '')?></textarea></div>
+                <div class="cm-field full"><label>Card link URL (optional)</label><input name="card_sections[<?=$i?>][items][<?=$j?>][url]" value="<?=cm_e($row['url'] ?? '')?>" data-card-field="url"></div>
+              </div>
+            </div>
+            <?php endforeach; ?>
+          </div>
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </section>
+
     <section class="cm-section" id="stats">
       <div class="cm-section-head"><div><h3>Investment Section Settings</h3><p>Heading, description and CTA shown above/below investment cards.</p></div></div>
       <div class="cm-fields">
@@ -198,6 +235,8 @@ $error = $_GET['error'] ?? '';
 
 <script>
 (() => {
+  const customSectionTemplate = `<div class="cm-section-record" data-section-record><input type="hidden" data-section-field="id"><div class="cm-card-top"><span class="cm-card-title">New card section</span><div class="cm-card-actions"><button type="button" class="cm-btn danger" data-section-remove>Delete Section</button></div></div><div class="cm-fields"><div class="cm-field"><label>Section title</label><input data-section-field="title" required></div><div class="cm-field"><label>Button text (optional)</label><input data-section-field="buttonText"></div><div class="cm-field full"><label>Description</label><textarea data-section-field="description"></textarea></div><div class="cm-field full"><label>Button URL</label><input data-section-field="buttonUrl" value="#contact"></div></div><div class="cm-section-head"><div><strong>Cards</strong><p>Each card can have an icon, title, description and optional link.</p></div><button type="button" class="cm-btn add" data-add-custom-card>+ Add Card</button></div><div class="cm-custom-card-list" data-section-cards></div></div>`;
+  const customCardTemplate = `<div class="cm-card" data-custom-item><div class="cm-card-top"><span class="cm-card-title">New card</span><div class="cm-card-actions"><label class="cm-enabled"><input type="checkbox" data-card-field="enabled" value="1" checked> Show</label><label class="cm-enabled"><input type="checkbox" data-card-field="featured" value="1"> Highlight</label><button type="button" class="cm-btn" data-custom-up>↑</button><button type="button" class="cm-btn" data-custom-down>↓</button><button type="button" class="cm-btn danger" data-custom-remove>Delete</button></div></div><div class="cm-fields"><div class="cm-field"><label>Card title</label><input data-card-field="title" required></div><div class="cm-field"><label>Icon (emoji or symbol)</label><input data-card-field="icon"></div><div class="cm-field full"><label>Description</label><textarea data-card-field="description"></textarea></div><div class="cm-field full"><label>Card link URL (optional)</label><input data-card-field="url"></div></div></div>`;
   const templates = {
     builder: `<div class="cm-card" data-card><div class="cm-card-top"><span class="cm-card-title">New builder</span><div class="cm-card-actions"><label class="cm-enabled"><input type="checkbox" data-field="enabled" value="1" checked> Show</label><button type="button" class="cm-btn" data-up>↑</button><button type="button" class="cm-btn" data-down>↓</button><button type="button" class="cm-btn danger" data-remove>Delete</button></div></div><div class="cm-fields"><div class="cm-field"><label>Builder name</label><input data-field="name" required></div><div class="cm-field"><label>Project count text</label><input data-field="count" placeholder="5+ Projects"></div><div class="cm-field"><label>Icon</label><input data-field="icon" value="▦"></div><div class="cm-field"><label>Card link URL</label><input data-field="url" value="#"></div></div></div>`,
     locations: `<div class="cm-card" data-card><div class="cm-card-top"><span class="cm-card-title">New location</span><div class="cm-card-actions"><label class="cm-enabled"><input type="checkbox" data-field="enabled" value="1" checked> Show</label><label class="cm-enabled"><input type="checkbox" data-field="featured" value="1"> Highlight</label><button type="button" class="cm-btn" data-up>↑</button><button type="button" class="cm-btn" data-down>↓</button><button type="button" class="cm-btn danger" data-remove>Delete</button></div></div><div class="cm-fields"><div class="cm-field"><label>Location name</label><input data-field="name" required></div><div class="cm-field"><label>Icon</label><input data-field="icon" value="⌖"></div><div class="cm-field full"><label>Description</label><textarea data-field="description"></textarea></div><div class="cm-field full"><label>Card link URL</label><input data-field="url" value="#"></div></div></div>`,
@@ -220,6 +259,67 @@ $error = $_GET['error'] ?? '';
       });
     });
   }
+
+  function reindexCustomSections() {
+    const list = document.querySelector('[data-list="card_sections"]');
+    [...list.children].forEach((section, sectionIndex) => {
+      section.querySelector('.cm-card-title').textContent = `Card section ${sectionIndex + 1}`;
+      section.querySelectorAll('[data-section-field]').forEach(field => {
+        field.name = `card_sections[${sectionIndex}][${field.dataset.sectionField}]`;
+      });
+      const cards = section.querySelector('[data-section-cards]');
+      [...cards.children].forEach((card, cardIndex) => {
+        card.querySelector('.cm-card-title').textContent = `Card ${cardIndex + 1}`;
+        card.querySelectorAll('[data-card-field]').forEach(field => {
+          field.name = `card_sections[${sectionIndex}][items][${cardIndex}][${field.dataset.cardField}]`;
+        });
+      });
+    });
+  }
+
+  document.querySelector('[data-add-section]').addEventListener('click', () => {
+    const list = document.querySelector('[data-list="card_sections"]');
+    const wrap = document.createElement('div');
+    wrap.innerHTML = customSectionTemplate.trim();
+    const section = wrap.firstElementChild;
+    section.querySelector('[data-section-field="id"]').value =
+      `custom-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+    list.appendChild(section);
+    const cards = section.querySelector('[data-section-cards]');
+    const cardWrap = document.createElement('div');
+    cardWrap.innerHTML = customCardTemplate.trim();
+    cards.appendChild(cardWrap.firstElementChild);
+    reindexCustomSections();
+    section.scrollIntoView({behavior:'smooth',block:'center'});
+  });
+
+  document.querySelector('[data-list="card_sections"]').addEventListener('click', e => {
+    const section = e.target.closest('[data-section-record]');
+    if (!section) return;
+    if (e.target.closest('[data-section-remove]')) {
+      if (confirm('Delete this section and all its cards? It will be removed after you save.')) section.remove();
+      reindexCustomSections();
+    } else if (e.target.closest('[data-add-custom-card]')) {
+      const cards = section.querySelector('[data-section-cards]');
+      const wrap = document.createElement('div');
+      wrap.innerHTML = customCardTemplate.trim();
+      cards.appendChild(wrap.firstElementChild);
+      reindexCustomSections();
+      cards.lastElementChild.scrollIntoView({behavior:'smooth',block:'center'});
+    } else if (e.target.closest('[data-custom-remove]')) {
+      const card = e.target.closest('[data-custom-item]');
+      if (confirm('Delete this card? It will be removed after you save.')) card.remove();
+      reindexCustomSections();
+    } else if (e.target.closest('[data-custom-up]')) {
+      const card = e.target.closest('[data-custom-item]');
+      if (card.previousElementSibling) card.parentElement.insertBefore(card, card.previousElementSibling);
+      reindexCustomSections();
+    } else if (e.target.closest('[data-custom-down]')) {
+      const card = e.target.closest('[data-custom-item]');
+      if (card.nextElementSibling) card.parentElement.insertBefore(card.nextElementSibling, card);
+      reindexCustomSections();
+    }
+  });
 
   document.querySelectorAll('[data-add]').forEach(btn => btn.addEventListener('click', () => {
     const key = btn.dataset.add;
@@ -247,6 +347,7 @@ $error = $_GET['error'] ?? '';
   });
 
   ['builder','locations','stats','benefits'].forEach(reindex);
+  reindexCustomSections();
 })();
 </script>
 </body>

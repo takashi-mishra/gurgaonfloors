@@ -423,6 +423,13 @@ $firstSlide = $slides[0] ?? [];
                 continue;
             }
 
+            if ($sectionDefinition['type'] === 'cards') {
+                $customCardSection = $data['cardSections'][$sectionDefinition['index']] ?? [];
+                require __DIR__ . '/../Component/custom-card-section.php';
+                unset($customCardSection);
+                continue;
+            }
+
             $informationSectionKey = $sectionKey;
             require __DIR__ . '/../Component/information-sections.php';
             ?>

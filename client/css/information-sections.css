@@ -202,6 +202,70 @@
     background: #a93426;
 }
 
+.custom-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.custom-section-card {
+    min-height: 142px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid #dedede;
+    border-radius: 13px;
+    text-align: center;
+    color: #292929;
+    text-decoration: none;
+    transition: .3s ease;
+}
+
+.custom-section-card:hover {
+    transform: translateY(-5px);
+    border-color: #c94736;
+    box-shadow: 0 10px 24px rgba(0,0,0,.07);
+}
+
+.custom-section-card-icon {
+    color: #c94736;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.custom-section-card strong {
+    font-size: 17px;
+}
+
+.custom-section-card small {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #777;
+}
+
+.custom-section-card.featured {
+    background: #c94736;
+    border-color: #c94736;
+    color: #fff;
+}
+
+.custom-section-card.featured .custom-section-card-icon,
+.custom-section-card.featured small {
+    color: #fff;
+}
+
+.custom-section-card.featured:hover {
+    background: #a93426;
+}
+
+.custom-card-section-button {
+    margin-top: 30px;
+}
+
 .location-section .info-bottom-button {
     margin-top: 30px;
 }
@@ -311,6 +375,10 @@
     .location-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .custom-card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 650px) {
@@ -367,6 +435,11 @@
         gap: 12px;
     }
 
+    .custom-card-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
     .location-card {
         min-height: 125px;
     }
@@ -398,6 +471,7 @@
     .builder-card,
     .builder-icon,
     .location-card,
+    .custom-section-card,
     .investment-stat,
     .investment-benefit,
     .info-view-all,
