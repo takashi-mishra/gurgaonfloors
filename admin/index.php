@@ -406,8 +406,9 @@ $error = (string) ($_GET['error'] ?? '');
                 </div>
             </div>
             <div class="topbar-right">
-                <a href="../index.php" target="_blank" class="preview-button">
-                    ↗ &nbsp; Preview Website
+                <a href="../index.php" target="_blank" class="preview-button" aria-label="Preview website">
+                    <span aria-hidden="true">↗</span>
+                    <span class="preview-label">Preview Website</span>
                 </a>
                 <div class="admin-avatar" title="Administrator">A</div>
             </div>

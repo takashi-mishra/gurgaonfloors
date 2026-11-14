@@ -114,8 +114,12 @@ a {
 
 .sidebar-nav {
     display: flex;
+    min-height: 0;
+    flex: 1 1 auto;
     flex-direction: column;
     gap: 5px;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
 }
 
 .nav-item {
@@ -265,6 +269,7 @@ a {
     border-radius: 6px;
     font-size: 11px;
     font-weight: 700;
+    white-space: nowrap;
 }
 
 .preview-button:hover {
@@ -1202,6 +1207,17 @@ a {
         display: block;
     }
 
+    .preview-button {
+        width: 36px;
+        height: 36px;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .preview-button .preview-label {
+        display: none;
+    }
+
     .dashboard-grid,
     .editor-layout {
         grid-template-columns: 1fr;
@@ -1228,17 +1244,6 @@ a {
 
     .topbar-right {
         gap: 8px;
-    }
-
-    .preview-button {
-        width: 36px;
-        height: 36px;
-        justify-content: center;
-        padding: 0;
-    }
-
-    .preview-button span:last-child {
-        display: none;
     }
 
     .admin-avatar {
