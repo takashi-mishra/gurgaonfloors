@@ -34,7 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     document.querySelectorAll("[data-enquiry]").forEach((button) => {
-        button.addEventListener("click", () => {
+        button.addEventListener("click", (event) => {
+            if (button instanceof HTMLAnchorElement) {
+                event.preventDefault();
+            }
             openModal(button.dataset.project);
         });
     });

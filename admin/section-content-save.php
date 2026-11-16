@@ -171,3 +171,4 @@ try {
     header('Location: section-content.php?error=' . rawurlencode($e->getMessage()));
     exit;
 }
+

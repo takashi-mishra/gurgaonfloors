@@ -194,12 +194,23 @@ $firstSlide = $slides[0] ?? [];
                         <?php if (!is_array($item)) continue; ?>
 
                         <li>
-                            <a
-                                href="<?= escapeHtml($item['url'] ?? '#') ?>"
-                                class="nav-link"
-                            >
-                                <?= escapeHtml($item['label'] ?? '') ?>
-                            </a>
+                            <?php if (strcasecmp(trim((string) ($item['label'] ?? '')), 'Contact') === 0): ?>
+                                <a
+                                    href="#"
+                                    class="nav-link"
+                                    data-enquiry
+                                    data-project="General Property Enquiry"
+                                >
+                                    <?= escapeHtml($item['label'] ?? '') ?>
+                                </a>
+                            <?php else: ?>
+                                <a
+                                    href="<?= escapeHtml($item['url'] ?? '#') ?>"
+                                    class="nav-link"
+                                >
+                                    <?= escapeHtml($item['label'] ?? '') ?>
+                                </a>
+                            <?php endif; ?>
                         </li>
 
                     <?php endforeach; ?>
@@ -225,7 +236,7 @@ $firstSlide = $slides[0] ?? [];
                         </span>
                     </a>
 
-                    <a class="nav-cta" href="#contact">
+                    <a class="nav-cta" data-enquiry>
                         Enquire Now
                         <span aria-hidden="true">↗</span>
                     </a>
@@ -306,7 +317,7 @@ $firstSlide = $slides[0] ?? [];
 
                     <div class="hero-actions">
 
-                        <a href="#projects" class="button button-primary">
+                        <a href="#new-launch" class="button button-primary">
                             <?= escapeHtml(
                                 $hero['primaryButton'] ?? 'Explore Properties'
                             ) ?>
@@ -314,7 +325,7 @@ $firstSlide = $slides[0] ?? [];
                             <span aria-hidden="true">→</span>
                         </a>
 
-                        <a href="#contact" class="button button-secondary">
+                        <a href="#contact" class="button button-secondary" data-enquiry>
                             <?= escapeHtml(
                                 $hero['secondaryButton'] ?? 'Talk to an Expert'
                             ) ?>
